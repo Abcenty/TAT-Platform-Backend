@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "gateway"
+version = "0.1.0"
+description = ""
+authors = ["Andrey Kazackov <AndreyKazackoB@yandex.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.109.2"
+pydantic-settings = "^2.1.0"
+loguru = "^0.7.2"
+gunicorn = "^21.2.0"
+uvicorn = "^0.27.0.post1"
+asyncio = "^3.4.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
