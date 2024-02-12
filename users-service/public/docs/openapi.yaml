@@ -1,0 +1,422 @@
+openapi: 3.0.3
+info:
+  title: users-service
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost:8001'
+paths:
+  /login:
+    post:
+      summary: 'Авторизация пользователя'
+      operationId: ''
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  access_token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ1.eyJpc3MiOiJodHRwOi8vbG9jYWxob2N0L2xvZ2luIiwiaWF0IjoxNzA3NDY5OTEwLCJleHAiOjE3MDc0OTg3MTAsIm5iZiI6MTcwNzQ2OTkxMCwianRpIjoiTFRoZzdHekwxU1dSZjJ5RyIsInN1YiI6IjUyMDEzOCIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.bO3fzpEaFDmvXbcXIhgQMNIE_WnWOtG6UaUgBMLujPU
+                  expires_in: 28800
+                properties:
+                  access_token:
+                    type: string
+                    example: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ1.eyJpc3MiOiJodHRwOi8vbG9jYWxob2N0L2xvZ2luIiwiaWF0IjoxNzA3NDY5OTEwLCJleHAiOjE3MDc0OTg3MTAsIm5iZiI6MTcwNzQ2OTkxMCwianRpIjoiTFRoZzdHekwxU1dSZjJ5RyIsInN1YiI6IjUyMDEzOCIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.bO3fzpEaFDmvXbcXIhgQMNIE_WnWOtG6UaUgBMLujPU
+                    description: 'Bearer токен'
+                  expires_in:
+                    type: integer
+                    example: 28800
+                    description: 'Через сколько секунд токен станет неактивным'
+      tags:
+        - Авторизация
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  description: 'Значение поля value должно быть действительным электронным адресом.'
+                  example: melisa.cummings@example.com
+                password:
+                  type: string
+                  description: ''
+                  example: "'GsqGw~o{a"
+              required:
+                - email
+                - password
+      security: []
+  /me:
+    post:
+      summary: 'Получение данных авторизованного пользователя'
+      operationId: ''
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 520138
+                  last_name: Тестов
+                  first_name: Тест
+                  patronymic: null
+                  email: test@test
+                  created_at: '2024-02-08T21:48:18.000000Z'
+                  updated_at: '2024-02-08T21:48:18.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 520138
+                  last_name:
+                    type: string
+                    example: Тестов
+                  first_name:
+                    type: string
+                    example: Тест
+                  patronymic:
+                    type: string
+                    example: null
+                  email:
+                    type: string
+                    example: test@test
+                  created_at:
+                    type: string
+                    example: '2024-02-08T21:48:18.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2024-02-08T21:48:18.000000Z'
+      tags:
+        - Авторизация
+  /users:
+    get:
+      summary: 'Получение списка зарегистрированных пользователей'
+      operationId: ''
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  current_page: 1
+                  data:
+                    -
+                      id: 82
+                      last_name: edwvmvqylklmwwjx
+                      first_name: l
+                      patronymic: zgsrsucldxlpwfpifqzlwg
+                      email: robert25@example.org
+                      created_at: '2024-02-10T00:23:08.000000Z'
+                      updated_at: '2024-02-10T00:23:08.000000Z'
+                    -
+                      id: 79
+                      last_name: tqkyhjnmkflyjjxchi
+                      first_name: xgrglhahltzvjdkdxi
+                      patronymic: giggjvlvsluxwmrqcx
+                      email: goyette.webster@example.org
+                      created_at: '2024-02-10T00:22:06.000000Z'
+                      updated_at: '2024-02-10T01:06:42.000000Z'
+                    -
+                      id: 94
+                      last_name: test
+                      first_name: test
+                      patronymic: vljubktojmqsgfhyasnly
+                      email: test@test
+                      created_at: '2024-02-10T01:51:02.000000Z'
+                      updated_at: '2024-02-10T01:51:02.000000Z'
+                    -
+                      id: 45
+                      last_name: kwmftzyytjxdeqcvu
+                      first_name: tllmai
+                      patronymic: etzyio
+                      email: schoen.eldridge@example.net
+                      created_at: '2024-02-09T21:46:34.000000Z'
+                      updated_at: '2024-02-09T21:46:34.000000Z'
+                    -
+                      id: 48
+                      last_name: wphlbcnjs
+                      first_name: nidlgjlxsad
+                      patronymic: rkax
+                      email: mosciski.josefa@example.com
+                      created_at: '2024-02-09T21:47:14.000000Z'
+                      updated_at: '2024-02-09T21:47:14.000000Z'
+                  from: 1
+                  last_page: 1
+                  per_page: 18
+                  to: 5
+                  total: 5
+                properties:
+                  current_page:
+                    type: integer
+                    example: 1
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 82
+                        last_name: edwvmvqylklmwwjx
+                        first_name: l
+                        patronymic: zgsrsucldxlpwfpifqzlwg
+                        email: robert25@example.org
+                        created_at: '2024-02-10T00:23:08.000000Z'
+                        updated_at: '2024-02-10T00:23:08.000000Z'
+                      -
+                        id: 79
+                        last_name: tqkyhjnmkflyjjxchi
+                        first_name: xgrglhahltzvjdkdxi
+                        patronymic: giggjvlvsluxwmrqcx
+                        email: goyette.webster@example.org
+                        created_at: '2024-02-10T00:22:06.000000Z'
+                        updated_at: '2024-02-10T01:06:42.000000Z'
+                      -
+                        id: 94
+                        last_name: test
+                        first_name: test
+                        patronymic: vljubktojmqsgfhyasnly
+                        email: test@test
+                        created_at: '2024-02-10T01:51:02.000000Z'
+                        updated_at: '2024-02-10T01:51:02.000000Z'
+                      -
+                        id: 45
+                        last_name: kwmftzyytjxdeqcvu
+                        first_name: tllmai
+                        patronymic: etzyio
+                        email: schoen.eldridge@example.net
+                        created_at: '2024-02-09T21:46:34.000000Z'
+                        updated_at: '2024-02-09T21:46:34.000000Z'
+                      -
+                        id: 48
+                        last_name: wphlbcnjs
+                        first_name: nidlgjlxsad
+                        patronymic: rkax
+                        email: mosciski.josefa@example.com
+                        created_at: '2024-02-09T21:47:14.000000Z'
+                        updated_at: '2024-02-09T21:47:14.000000Z'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 82
+                        last_name:
+                          type: string
+                          example: edwvmvqylklmwwjx
+                        first_name:
+                          type: string
+                          example: l
+                        patronymic:
+                          type: string
+                          example: zgsrsucldxlpwfpifqzlwg
+                        email:
+                          type: string
+                          example: robert25@example.org
+                        created_at:
+                          type: string
+                          example: '2024-02-10T00:23:08.000000Z'
+                        updated_at:
+                          type: string
+                          example: '2024-02-10T00:23:08.000000Z'
+                  from:
+                    type: integer
+                    example: 1
+                  last_page:
+                    type: integer
+                    example: 1
+                  per_page:
+                    type: integer
+                    example: 18
+                  to:
+                    type: integer
+                    example: 5
+                  total:
+                    type: integer
+                    example: 5
+      tags:
+        - Пользователи
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                  description: ''
+                  example: 1
+                limit:
+                  type: integer
+                  description: 'Значение поля value должно быть не меньше 1. Значение поля value не может быть больше 100.'
+                  example: 18
+      security: []
+    post:
+      summary: 'Добавление нового пользователя'
+      operationId: ''
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Пользователи
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                last_name:
+                  type: string
+                  description: 'Количество символов в значении поля value не может превышать 255.'
+                  example: qc
+                first_name:
+                  type: string
+                  description: 'Количество символов в значении поля value не может превышать 255.'
+                  example: phyowxotsuzglqovljbv
+                patronymic:
+                  type: string
+                  description: 'Количество символов в значении поля value не может превышать 255.'
+                  example: idraufytukxmihlv
+                email:
+                  type: string
+                  description: 'Значение поля value должно быть действительным электронным адресом. Количество символов в значении поля value не может превышать 255.'
+                  example: wiza.edyth@example.org
+                password:
+                  type: string
+                  description: 'Количество символов в поле value должно быть не меньше 8.'
+                  example: "N/'{]7"
+              required:
+                - last_name
+                - first_name
+                - email
+                - password
+      security: []
+  '/users/{id}':
+    get:
+      summary: 'Получение данных пользователя'
+      operationId: ''
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  id: 82
+                  last_name: edwvmvqylklmwwjx
+                  first_name: l
+                  patronymic: zgsrsucldxlpwfpifqzlwg
+                  email: robert25@example.org
+                  created_at: '2024-02-10T00:23:08.000000Z'
+                  updated_at: '2024-02-10T00:23:08.000000Z'
+                properties:
+                  id:
+                    type: integer
+                    example: 82
+                  last_name:
+                    type: string
+                    example: edwvmvqylklmwwjx
+                  first_name:
+                    type: string
+                    example: l
+                  patronymic:
+                    type: string
+                    example: zgsrsucldxlpwfpifqzlwg
+                  email:
+                    type: string
+                    example: robert25@example.org
+                  created_at:
+                    type: string
+                    example: '2024-02-10T00:23:08.000000Z'
+                  updated_at:
+                    type: string
+                    example: '2024-02-10T00:23:08.000000Z'
+      tags:
+        - Пользователи
+      security: []
+    put:
+      summary: 'Изменение данных пользователя'
+      operationId: ''
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Пользователи
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                last_name:
+                  type: string
+                  description: 'Количество символов в поле value должно быть не меньше 1. Количество символов в значении поля value не может превышать 255.'
+                  example: tkyjqrfqpqlkqaq
+                first_name:
+                  type: string
+                  description: 'Количество символов в поле value должно быть не меньше 1. Количество символов в значении поля value не может превышать 255.'
+                  example: jkwfxilozpnl
+                patronymic:
+                  type: string
+                  description: 'Количество символов в значении поля value не может превышать 255.'
+                  example: wlgsszfnpggmwcaacuvy
+                email:
+                  type: string
+                  description: 'Значение поля value должно быть действительным электронным адресом. Количество символов в значении поля value не может превышать 255.'
+                  example: qmueller@example.com
+                password:
+                  type: string
+                  description: 'Количество символов в поле value должно быть не меньше 8.'
+                  example: '8zN!snK:q?:0ru6'
+      security: []
+    delete:
+      summary: 'Удаление пользователя'
+      operationId: ''
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Пользователи
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the user.'
+        example: 82
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: Авторизация
+    description: ''
+  -
+    name: Пользователи
+    description: ''
+components:
+  securitySchemes:
+    default:
+      type: http
+      scheme: bearer
+      description: 'Для получения токена используйте <a href="#avtorizaciia-POSTlogin">эндпоинт для авторизации</a>.'
+security:
+  -
+    default: []

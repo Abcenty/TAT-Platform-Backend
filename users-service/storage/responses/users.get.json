@@ -1,0 +1,182 @@
+{
+    "current_page": 1,
+    "data": [
+        {
+            "id": 4179,
+            "last_name": "Dach",
+            "first_name": "Bruce",
+            "patronymic": null,
+            "email": "kerluke.sally@example.org",
+            "created_at": "2024-02-08T21:21:28.000000Z",
+            "updated_at": "2024-02-08T21:21:28.000000Z"
+        },
+        {
+            "id": 4180,
+            "last_name": "Hand",
+            "first_name": "Avery",
+            "patronymic": null,
+            "email": "krajcik.berenice@example.org",
+            "created_at": "2024-02-08T21:21:28.000000Z",
+            "updated_at": "2024-02-08T21:21:28.000000Z"
+        },
+        {
+            "id": 4181,
+            "last_name": "Feest",
+            "first_name": "Alek",
+            "patronymic": null,
+            "email": "seth.klein@example.net",
+            "created_at": "2024-02-08T21:21:28.000000Z",
+            "updated_at": "2024-02-08T21:21:28.000000Z"
+        },
+        {
+            "id": 4182,
+            "last_name": "Schinner",
+            "first_name": "Baron",
+            "patronymic": null,
+            "email": "gunnar90@example.com",
+            "created_at": "2024-02-08T21:21:28.000000Z",
+            "updated_at": "2024-02-08T21:21:28.000000Z"
+        },
+        {
+            "id": 4183,
+            "last_name": "Ullrich",
+            "first_name": "Laila",
+            "patronymic": null,
+            "email": "osvaldo.fay@example.com",
+            "created_at": "2024-02-08T21:21:28.000000Z",
+            "updated_at": "2024-02-08T21:21:28.000000Z"
+        },
+        {
+            "id": 4184,
+            "last_name": "Schuppe",
+            "first_name": "Sid",
+            "patronymic": null,
+            "email": "pollich.nico@example.net",
+            "created_at": "2024-02-08T21:21:28.000000Z",
+            "updated_at": "2024-02-08T21:21:28.000000Z"
+        },
+        {
+            "id": 4185,
+            "last_name": "Bode",
+            "first_name": "Madelyn",
+            "patronymic": null,
+            "email": "wmetz@example.net",
+            "created_at": "2024-02-08T21:21:28.000000Z",
+            "updated_at": "2024-02-08T21:21:28.000000Z"
+        },
+        {
+            "id": 4186,
+            "last_name": "Dicki",
+            "first_name": "Libbie",
+            "patronymic": null,
+            "email": "heloise94@example.net",
+            "created_at": "2024-02-08T21:21:28.000000Z",
+            "updated_at": "2024-02-08T21:21:28.000000Z"
+        },
+        {
+            "id": 4187,
+            "last_name": "Shields",
+            "first_name": "Cullen",
+            "patronymic": null,
+            "email": "jessy76@example.com",
+            "created_at": "2024-02-08T21:21:28.000000Z",
+            "updated_at": "2024-02-08T21:21:28.000000Z"
+        },
+        {
+            "id": 4188,
+            "last_name": "Zulauf",
+            "first_name": "Mylene",
+            "patronymic": null,
+            "email": "skirlin@example.org",
+            "created_at": "2024-02-08T21:21:28.000000Z",
+            "updated_at": "2024-02-08T21:21:28.000000Z"
+        }
+    ],
+    "first_page_url": "http://localhost/users?page=1",
+    "from": 1,
+    "last_page": 100001,
+    "last_page_url": "http://localhost/users?page=100001",
+    "links": [
+        {
+            "url": null,
+            "label": "&laquo; Назад",
+            "active": false
+        },
+        {
+            "url": "http://localhost/users?page=1",
+            "label": "1",
+            "active": true
+        },
+        {
+            "url": "http://localhost/users?page=2",
+            "label": "2",
+            "active": false
+        },
+        {
+            "url": "http://localhost/users?page=3",
+            "label": "3",
+            "active": false
+        },
+        {
+            "url": "http://localhost/users?page=4",
+            "label": "4",
+            "active": false
+        },
+        {
+            "url": "http://localhost/users?page=5",
+            "label": "5",
+            "active": false
+        },
+        {
+            "url": "http://localhost/users?page=6",
+            "label": "6",
+            "active": false
+        },
+        {
+            "url": "http://localhost/users?page=7",
+            "label": "7",
+            "active": false
+        },
+        {
+            "url": "http://localhost/users?page=8",
+            "label": "8",
+            "active": false
+        },
+        {
+            "url": "http://localhost/users?page=9",
+            "label": "9",
+            "active": false
+        },
+        {
+            "url": "http://localhost/users?page=10",
+            "label": "10",
+            "active": false
+        },
+        {
+            "url": null,
+            "label": "...",
+            "active": false
+        },
+        {
+            "url": "http://localhost/users?page=100000",
+            "label": "100000",
+            "active": false
+        },
+        {
+            "url": "http://localhost/users?page=100001",
+            "label": "100001",
+            "active": false
+        },
+        {
+            "url": "http://localhost/users?page=2",
+            "label": "Вперёд &raquo;",
+            "active": false
+        }
+    ],
+    "next_page_url": "http://localhost/users?page=2",
+    "path": "http://localhost/users",
+    "per_page": 10,
+    "prev_page_url": null,
+    "to": 10,
+    "total": 1000001
+}
