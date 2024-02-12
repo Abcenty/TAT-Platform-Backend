@@ -15,6 +15,7 @@ asyncio = "^3.4.3"
 sqlalchemy = {extras = ["asyncio"], version = "^2.0.26"}
 loguru = "^0.7.2"
 logging = "^0.4.9.6"
+ujson = "^5.9.0"
 
 
 [build-system]
