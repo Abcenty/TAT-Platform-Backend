@@ -10,7 +10,7 @@ router = APIRouter()
     status_code=status.HTTP_200_OK,
     responses={
         status.HTTP_204_NO_CONTENT: {"description": "Соединение со шлюзом для ТатЦАМИ установлено"},
-        status.HTTP_400_BadRequest: {"model": BadRequest},
+        status.HTTP_400_BAD_REQUEST: {"model": BadRequest},
         status.HTTP_500_INTERNAL_SERVER_ERROR: {"model": DetailedHTTPException},
     },
 )

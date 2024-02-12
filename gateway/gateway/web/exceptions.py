@@ -1,7 +1,7 @@
 from fastapi import HTTPException, status
 from pydantic.dataclasses import dataclass
 from typing import Optional, Any
-from exception_status import Status
+from .exception_status import Status
 
 
 class AbstractError(Exception):
