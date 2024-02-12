@@ -3,23 +3,24 @@ from pathlib import Path
 from tempfile import gettempdir
 from typing import List
 
-from pydantic_settings import BaseSettings, SettingsConfigDict
+# from pydantic_settings import BaseSettings, SettingsConfigDict
+import pydantic_settings
 
 TEMP_DIR = Path(gettempdir())
 
 
-class LogLevel(str, enum.Enum):  # noqa: WPS600
-    """Possible log levels."""
+# class LogLevel(str, enum.Enum):  # noqa: WPS600
+#     """Possible log levels."""
 
-    NOTSET = "NOTSET"
-    DEBUG = "DEBUG"
-    INFO = "INFO"
-    WARNING = "WARNING"
-    ERROR = "ERROR"
-    FATAL = "FATAL"
+#     NOTSET = "NOTSET"
+#     DEBUG = "DEBUG"
+#     INFO = "INFO"
+#     WARNING = "WARNING"
+#     ERROR = "ERROR"
+#     FATAL = "FATAL"
 
 
-class Settings(BaseSettings):
+class Settings(pydantic_settings.BaseSettings):
     """Настройки приложения."""
 
     # Адрес для запуска приложения
@@ -38,11 +39,11 @@ class Settings(BaseSettings):
     account_tatcami_host: str = "127.0.0.1"
     account_tatcami_port: int = 50051
 
-    log_level: LogLevel = LogLevel.DEBUG
+    # log_level: LogLevel = LogLevel.DEBUG
 
-    model_config = SettingsConfigDict(
+    model_config = pydantic_settings.SettingsConfigDict(
         env_file=".env",
-        env_prefix="BACKEND_",
+        env_prefix="GATEWAY_",
         env_file_encoding="utf-8",
     )
 

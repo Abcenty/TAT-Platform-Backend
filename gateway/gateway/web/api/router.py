@@ -1,8 +1,8 @@
-from fastapi.routing import APIRouter
-
+from fastapi import APIRouter
 from gateway.web.api import (
     tatcami,
 )
 
 api_router = APIRouter()
-api_router.include_router(tatcami.router, prefix="/tatcami", tags=["ТАТЦАМИ"])
+
+api_router.include_router(tatcami.router, prefix="/tatcami", tags=["ТатЦАМИ"])
