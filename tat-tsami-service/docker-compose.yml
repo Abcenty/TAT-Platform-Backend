@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  tat-tsami:
+    build:
+      context: ../
+      dockerfile: tat-tsami-service/Dockerfile
+    image: tat-platform-backend:tat_tsami
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    env_file: .env
+    environment:
+      - IS_PRODUCTION=yes
+    restart: always
+    networks:
+      - tat-ris
+      - tat-platform
+
+networks:
+  tat-ris:
+    external: true
+  tat-platform:
+    external: true
