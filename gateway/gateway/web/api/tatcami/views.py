@@ -17,11 +17,12 @@ router = APIRouter()
 async def ping():
     "Проверка соединения со шлюзом для ТатЦАМИ"
     try:
+        logging.debug("Connection established")
         return "Соединение со шлюзом для ТатЦАМИ установлено"
     except AbstractError as error:
         if error.message == "BadRequest":
             raise BadRequest
         logging.error(f"Error while connecting to TatCAMI gateway ({error.status}: {error.message})")
         raise DetailedHTTPException()
-    logging.debug("Connection established")
+    
 
