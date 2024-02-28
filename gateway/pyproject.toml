@@ -9,10 +9,13 @@ readme = "README.md"
 python = "^3.11"
 fastapi = "^0.109.2"
 pydantic-settings = "^2.1.0"
-loguru = "^0.7.2"
 gunicorn = "^21.2.0"
 uvicorn = "^0.27.0.post1"
 asyncio = "^3.4.3"
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.26"}
+loguru = "^0.7.2"
+logging = "^0.4.9.6"
+ujson = "^5.9.0"
 
 
 [build-system]
