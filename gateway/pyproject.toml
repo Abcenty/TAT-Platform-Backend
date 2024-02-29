@@ -6,7 +6,7 @@ authors = ["Andrey Kazackov <AndreyKazackoB@yandex.ru>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 fastapi = "^0.109.2"
 pydantic-settings = "^2.1.0"
 gunicorn = "^21.2.0"
