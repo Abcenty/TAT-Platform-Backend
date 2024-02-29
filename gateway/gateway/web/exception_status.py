@@ -45,7 +45,8 @@ class Status(enum.Enum):
 
 
 _Cardinality = collections.namedtuple(
-    '_Cardinality', 'client_streaming, server_streaming',
+    "_Cardinality",
+    "client_streaming, server_streaming",
 )
 
 
@@ -58,6 +59,6 @@ class Cardinality(_Cardinality, enum.Enum):
 
 
 Handler = collections.namedtuple(
-    'Handler', 'func, cardinality, request_type, reply_type',
+    "Handler",
+    "func, cardinality, request_type, reply_type",
 )
-

@@ -1,5 +1,6 @@
 import uvicorn
 from gateway.settings import settings
+
 if not settings.reload:
     from gateway.gunicorn_runner import GunicornApplication
 

@@ -1,3 +1,3 @@
-Для локального запуска из директории \gateway\gateway:
+Для локального запуска из директории /gateway:
 
-uvicorn main:app --reload --port 82
+poetry run python -m gateway

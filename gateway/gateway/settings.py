@@ -3,7 +3,6 @@ from pathlib import Path
 from tempfile import gettempdir
 from typing import List
 
-from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 TEMP_DIR = Path(gettempdir())
@@ -36,6 +35,7 @@ class Settings(BaseSettings):
     environment: str = "prod"
 
     # Микросервис ТатЦАМи
+    tatcami_service_protocol: str = "http"
     tatcami_service_host: str = "127.0.0.1"
     tatcami_service_port: int = 7001
 
