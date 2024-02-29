@@ -18,7 +18,7 @@ def get_app() -> FastAPI:
     configure_logging()
     app = FastAPI(
         title="gateway",
-        version=metadata.version("gateway"),
+        # version=metadata.version("gateway"), #TODO Определить и вставить корреткную версию метаданных
         docs_url="/api/docs",
         redoc_url="/api/redoc",
         openapi_url="/api/openapi.json",
