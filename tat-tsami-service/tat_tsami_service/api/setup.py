@@ -10,16 +10,16 @@ from tat_tsami_service.settings.environments.app import AppSettings
 def register_app(settings: AppSettings) -> FastAPI:
     app = FastAPI(
         debug=settings.debug,
-        lifespan=lifespan
+        lifespan=lifespan,
     )
 
     init_endpoints(app=app)
     init_exceptions(app=app)
 
-    app.dependency_overrides.update( # noqa
+    app.dependency_overrides.update(  # noqa
         {
-            AppSettingsMarker: lambda: settings
-        }
+            AppSettingsMarker: lambda: settings,
+        },
     )
 
     return app

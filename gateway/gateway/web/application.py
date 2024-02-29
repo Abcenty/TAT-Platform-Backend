@@ -18,7 +18,7 @@ def get_app() -> FastAPI:
     configure_logging()
     app = FastAPI(
         title="gateway",
-        version=metadata.version("gateway"),
+        # version=metadata.version("gateway"), #TODO Определить и вставить корреткную версию метаданных
         docs_url="/api/docs",
         redoc_url="/api/redoc",
         openapi_url="/api/openapi.json",
@@ -28,13 +28,12 @@ def get_app() -> FastAPI:
     # Adds startup and shutdown events.
     session = None
 
-    @app.on_event('startup')
+    @app.on_event("startup")
     async def _startup_event():
-        global session 
+        global session
         session = aiohttp.ClientSession()
 
-
-    @app.on_event('shutdown')
+    @app.on_event("shutdown")
     async def _shutdown_event():
         await session.close()
 

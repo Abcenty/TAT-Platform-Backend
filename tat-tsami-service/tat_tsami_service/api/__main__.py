@@ -18,7 +18,7 @@ def number_of_workers() -> int:
 def run_application() -> None:
     logging.getLogger("passlib").setLevel(logging.ERROR)
     settings = get_app_settings(
-        app_env=AppEnvTypes.prod if os.getenv("IS_PRODUCTION") else AppEnvTypes.dev
+        app_env=AppEnvTypes.prod if os.getenv("IS_PRODUCTION") else AppEnvTypes.dev,
     )
     app = register_app(settings=settings)
 
@@ -27,7 +27,7 @@ def run_application() -> None:
             app,
             host=settings.server_host,
             port=settings.server_port,
-            log_level=logging.INFO
+            log_level=logging.INFO,
         )
 
         server = uvicorn.Server(config)
@@ -40,7 +40,7 @@ def run_application() -> None:
             "bind": f"{settings.server_host}:{settings.server_port}",
             "preload_app": True,
             "workers": number_of_workers(),
-            "worker_class": "uvicorn.workers.UvicornWorker"
+            "worker_class": "uvicorn.workers.UvicornWorker",
         }
         server = StandaloneApplication(app, options)
         server.run()

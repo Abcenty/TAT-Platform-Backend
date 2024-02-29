@@ -4,11 +4,10 @@ from gunicorn.app.base import BaseApplication
 
 
 class StandaloneApplication(BaseApplication):
-
     def __init__(
         self,
         application: Any,
-        options: Optional[Dict[str, Any]] = None
+        options: Optional[Dict[str, Any]] = None,
     ):
         self._options = options or {}
         self._application = application
