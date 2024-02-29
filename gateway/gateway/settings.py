@@ -24,7 +24,7 @@ class Settings(BaseSettings):
 
     # Адрес для запуска приложения
     host: str = "127.0.0.1"
-    port: int = 8000
+    port: int = 7070
     origins: List[str] = ["*"]
     # Количество воркеров uvicorn
     workers_count: int = 3
