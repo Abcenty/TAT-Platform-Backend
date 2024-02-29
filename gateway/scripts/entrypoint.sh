@@ -1,2 +1,2 @@
 #!/bin/sh
-python -m gateway
+poetry run python -m gateway

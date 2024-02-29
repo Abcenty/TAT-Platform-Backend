@@ -4,10 +4,6 @@ import collections
 
 @enum.unique
 class Status(enum.Enum):
-    """Predefined gRPC status codes represented as enum
-
-    See also: https://github.com/grpc/grpc/blob/master/doc/statuscodes.md
-    """
     #: The operation completed successfully
     OK = 0
     #: The operation was cancelled (typically by the caller)
