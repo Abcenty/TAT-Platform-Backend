@@ -13,5 +13,5 @@ class BaseAppSettings(BaseSettings):
 
     model_config = SettingsConfigDict(
         env_file=".env",
-        validate_assignment=True
+        validate_assignment=True,
     )
