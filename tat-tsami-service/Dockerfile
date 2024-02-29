@@ -2,7 +2,7 @@ FROM python:3.11
 
 WORKDIR .
 
-COPY /tat-tsami-service .
+COPY /tat-tsami-service/gateway .
 
 RUN python3.11 -m pip install poetry
 RUN poetry install --no-dev
