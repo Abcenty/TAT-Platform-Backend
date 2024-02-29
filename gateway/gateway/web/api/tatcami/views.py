@@ -1,5 +1,5 @@
 from fastapi import APIRouter, status
-from web.exceptions import BadRequest, DetailedHTTPException, AbstractError
+from gateway.web.exceptions import BadRequest, DetailedHTTPException, AbstractError
 import logging
 
 router = APIRouter()
@@ -25,4 +25,3 @@ async def ping():
         logging.error(f"Error while connecting to TatCAMI gateway ({error.status}: {error.message})")
         raise DetailedHTTPException()
     
-
