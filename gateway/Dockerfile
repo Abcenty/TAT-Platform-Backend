@@ -14,7 +14,7 @@ RUN adduser -D -s /bin/bash newuser && \
     pip install poetry
 
 # Copy  requirements.txt to install dependencies
-WORKDIR /project
+WORKDIR /project/gateway
 COPY pyproject.toml poetry.lock ./
 
 # Installing dependencies to system python
