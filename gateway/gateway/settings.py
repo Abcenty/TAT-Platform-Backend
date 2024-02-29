@@ -2,8 +2,11 @@ import enum
 from pathlib import Path
 from tempfile import gettempdir
 from typing import List
-
+from dotenv import load_dotenv
+import os
 from pydantic_settings import BaseSettings, SettingsConfigDict
+
+load_dotenv()
 
 TEMP_DIR = Path(gettempdir())
 
@@ -23,21 +26,21 @@ class Settings(BaseSettings):
     """Настройки приложения."""
 
     # Адрес для запуска приложения
-    host: str = "127.0.0.1"
-    port: int = 7070
+    host: str = os.getenv("GATEWAY_HOST")
+    port: int = os.getenv("GATEWAY_PORT")
     origins: List[str] = ["*"]
     # Количество воркеров uvicorn
-    workers_count: int = 3
+    workers_count: int = os.getenv("GATEWAY_WORKERS_COUNT")
     # Включение режима отладки
-    reload: bool = True
+    reload: bool = os.getenv("GATEWAY_RELOAD")
 
     # Текущее окружение
     environment: str = "prod"
 
     # Микросервис ТатЦАМи
-    tatcami_service_protocol: str = "http"
-    tatcami_service_host: str = "127.0.0.1"
-    tatcami_service_port: int = 7001
+    tatcami_service_protocol: str = os.getenv("GATEWAY_TATCAMI_SERVICE_PROTOCOL")
+    tatcami_service_host: str = os.getenv("GATEWAY_TATCAMI_SERVICE_HOST")
+    tatcami_service_port: int = os.getenv("GATEWAY_TATCAMI_SERVICE_PORT")
 
     log_level: LogLevel = LogLevel.DEBUG
 
