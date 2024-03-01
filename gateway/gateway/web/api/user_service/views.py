@@ -1,8 +1,8 @@
 from fastapi import APIRouter, status
 
 from gateway import logging
-from gateway.services.tatcami.lifetime import tatcami_post_session
-from gateway.web.api.tatcami.exceptions import AuthorizationError
+from gateway.services.user_service.lifetime import user_service_post_session
+from gateway.web.api.user_service.exceptions import AuthorizationError
 from gateway.web.api.user_service.schema import Auth
 from gateway.web.exceptions import AbstractError
 
@@ -24,7 +24,7 @@ async def auth(auth_data: Auth):
         AuthorizationError: Ошибка при получении токена авторизации
     """
     try:
-        await tatcami_post_session("api/v1/auth/", auth_data)
+        return await user_service_post_session("login", auth_data)
     except AbstractError as error:
         logging.error(
             f"Error while authorization:({error.status}: {error.message})",

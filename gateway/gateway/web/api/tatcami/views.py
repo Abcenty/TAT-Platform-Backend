@@ -3,12 +3,11 @@ from uuid import UUID
 from fastapi import APIRouter, status
 
 from gateway import logging
-from gateway.services.tatcami.lifetime import tatcami_get_session, tatcami_post_session
+from gateway.services.tatcami.lifetime import tatcami_get_session
 from gateway.web.api.tatcami.exceptions import (
-    AuthorizationError, GetDevicesOnOrganizationsError,
+    GetDevicesOnOrganizationsError,
     GetGeneralStatisticsError, GetStatisticsOnOrganizationsError,
     InvalidOrganizationIdError)
-from gateway.web.api.tatcami.schema import Auth
 from gateway.web.exceptions import (AbstractError, BadRequest,
                                     DetailedHTTPException)
 
