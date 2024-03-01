@@ -29,7 +29,7 @@ async def get_general_statistics():
         GetGeneralStatisticsError: Ошибка при получении общей статистики с ТатЦАМи
     """
     try:
-        tatcami_get_session("api/v1/statistics/")
+        return await tatcami_get_session("api/v1/statistics/")
     except AbstractError as error:
         logging.error(
             f"Error while getting general statistics:({error.status}: {error.message})",
@@ -56,7 +56,7 @@ async def get_organizations_statistics():
         GetStatisticsOnOrganizationsError: Ошибка при получении статистики по организациям с ТатЦАМи
     """
     try:
-        tatcami_get_session("api/v1/statistics/organizations/")
+        return await tatcami_get_session("api/v1/statistics/organizations/")
     except AbstractError as error:
         logging.error(
             f"Error while getting statistics on organizations:({error.status}: {error.message})",
@@ -86,7 +86,7 @@ async def get_devices_of_organization(organization_id: UUID):
         GetDevicesOnOrganizationsError: Ошибка при получении устройств организации с ТатЦАМи
     """
     try:
-        tatcami_get_session(f"api/v1/statistics/organizations/{organization_id}")
+        return await tatcami_get_session(f"api/v1/statistics/organizations/{organization_id}")
     except AbstractError as error:
         if error.message == "InvalidOrganizationIdError":
             raise InvalidOrganizationIdError()
