@@ -42,6 +42,11 @@ class Settings(BaseSettings):
     tatcami_service_host: str = os.getenv("GATEWAY_TATCAMI_SERVICE_HOST")
     tatcami_service_port: int = os.getenv("GATEWAY_TATCAMI_SERVICE_PORT")
 
+    # Микросервис user_service
+    user_service_service_protocol: str = os.getenv("GATEWAY_USER_SERVICE_SERVICE_PROTOCOL")
+    user_service_service_host: str = os.getenv("GATEWAY_USER_SERVICE_SERVICE_HOST")
+    user_service_service_port: int = os.getenv("GATEWAY_USER_SERVICE_SERVICE_PORT")
+
     log_level: LogLevel = LogLevel.DEBUG
 
     model_config = SettingsConfigDict(
