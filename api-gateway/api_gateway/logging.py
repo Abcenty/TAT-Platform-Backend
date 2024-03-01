@@ -4,7 +4,7 @@ from typing import Union
 
 from loguru import logger
 
-from gateway.settings import settings
+from api_gateway.settings import settings
 
 
 class InterceptHandler(logging.Handler):

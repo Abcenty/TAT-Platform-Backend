@@ -1,13 +1,13 @@
 from fastapi import APIRouter, status
-from gateway import logging
-from gateway.web.exceptions import BadRequest, DetailedHTTPException, AbstractError
-from gateway.web.api.tatcami.exceptions import (
+from api_gateway import logging
+from api_gateway.web.exceptions import BadRequest, DetailedHTTPException, AbstractError
+from api_gateway.web.api.tatcami.exceptions import (
     GetGeneralStatisticsError,
     GetStatisticsOnOrganizationsError,
     InvalidOrganizationIdError,
     GetDevicesOnOrganizationsError,
 )
-from gateway.services.tatcami.lifetime import tatcami_get_session
+from api_gateway.services.tatcami.lifetime import tatcami_get_session
 from uuid import UUID
 
 router = APIRouter()

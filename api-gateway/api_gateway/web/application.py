@@ -3,8 +3,8 @@ import aiohttp
 from fastapi import FastAPI
 from fastapi.responses import UJSONResponse
 
-from gateway.logging import configure_logging
-from gateway.web.api.router import api_router
+from api_gateway.logging import configure_logging
+from api_gateway.web.api.router import api_router
 
 
 def get_app() -> FastAPI:

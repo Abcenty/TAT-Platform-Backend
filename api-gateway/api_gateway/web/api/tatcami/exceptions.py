@@ -1,6 +1,6 @@
 from pydantic.dataclasses import dataclass
 
-from gateway.web.exceptions import DetailedHTTPException
+from api_gateway.web.exceptions import DetailedHTTPException
 
 
 @dataclass
