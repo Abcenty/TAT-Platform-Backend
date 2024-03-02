@@ -26,21 +26,19 @@ class Settings(BaseSettings):
     """Настройки приложения."""
 
     # Адрес для запуска приложения
-    host: str = os.getenv("GATEWAY_HOST")
-    port: int = os.getenv("GATEWAY_PORT")
+    host: str
+    port: int
     origins: List[str] = ["*"]
-    # Количество воркеров uvicorn
-    workers_count: int = os.getenv("GATEWAY_WORKERS_COUNT")
     # Включение режима отладки
-    reload: bool = os.getenv("GATEWAY_RELOAD")
+    reload: bool
 
     # Текущее окружение
     environment: str = "prod"
 
     # Микросервис ТатЦАМи
-    tatcami_service_protocol: str = os.getenv("GATEWAY_TATCAMI_SERVICE_PROTOCOL")
-    tatcami_service_host: str = os.getenv("GATEWAY_TATCAMI_SERVICE_HOST")
-    tatcami_service_port: int = os.getenv("GATEWAY_TATCAMI_SERVICE_PORT")
+    tatcami_service_protocol: str
+    tatcami_service_host: str
+    tatcami_service_port: int
 
     # Микросервис user_service
     user_service_service_protocol: str = os.getenv("GATEWAY_USER_SERVICE_SERVICE_PROTOCOL")
@@ -49,11 +47,7 @@ class Settings(BaseSettings):
 
     log_level: LogLevel = LogLevel.DEBUG
 
-    model_config = SettingsConfigDict(
-        env_file=".env",
-        env_prefix="GATEWAY_",
-        env_file_encoding="utf-8",
-    )
+    model_config = SettingsConfigDict(env_file=".env")
 
 
 settings = Settings()

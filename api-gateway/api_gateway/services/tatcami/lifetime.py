@@ -1,7 +1,7 @@
 import aiohttp
 from typing import Callable
 
-from gateway.settings import settings
+from api_gateway.settings import settings
 
 
 async def tatcami_get_session(path: str) -> Callable:
