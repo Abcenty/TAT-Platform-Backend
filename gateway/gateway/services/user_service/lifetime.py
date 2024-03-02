@@ -22,7 +22,7 @@ async def user_service_get_session(path: str) -> Callable:
             return await response.text()
 
 
-async def user_service_post_session(path: str, body: dict | None = None) -> Callable:
+async def user_service_post_session(path: str, body: dict | None = None, headers: dict | None = None) -> Callable:
     """Получение сессионого соединения с микросервисом user_service
 
     Args:
@@ -35,7 +35,8 @@ async def user_service_post_session(path: str, body: dict | None = None) -> Call
     async with aiohttp.ClientSession() as session:
         async with session.post(
             f"{settings.user_service_service_protocol}://{settings.user_service_service_host}:{settings.user_service_service_port}/{path}",
-            data=body.dict()
+            data=body.dict() if body else None,
+            headers=headers
         ) as response:
             # raise AbstractError(status=response.status, message=json.loads(await response.text()))
             return json.loads(await response.text())
