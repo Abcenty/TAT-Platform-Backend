@@ -6,7 +6,7 @@ authors = ["Andrey Kazackov <AndreyKazackoB@yandex.ru>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 fastapi = "^0.109.2"
 pydantic-settings = "^2.1.0"
 gunicorn = "^21.2.0"
@@ -17,8 +17,15 @@ loguru = "^0.7.2"
 logging = "^0.4.9.6"
 ujson = "^5.9.0"
 aiohttp = "^3.9.3"
-python-dotenv = "^1.0.1"
+pydantic = {extras = ["email"], version = "^2.6.3"}
 
+
+[tool.poetry.group.dev.dependencies]
+poethepoet = "^0.25.0"
+poetry-dotenv-plugin = "^0.2.0"
+
+[tool.poe.tasks]
+run = "poetry run python -m gateway"
 
 [build-system]
 requires = ["poetry-core"]
