@@ -8,6 +8,8 @@ class StatisticsSchema(BaseModel):
     count_patients: int
     count_studies: int
     total_disk_size: int
+    count_first_opinion: int
+    count_second_opinion: int
 
 
 class StatisticsOrganizationSchema(BaseModel):
