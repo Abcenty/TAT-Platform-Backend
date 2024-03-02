@@ -35,6 +35,8 @@ async def get_statistics(
             count_patients=json["count_patients"],
             count_studies=json["count_studies"],
             total_disk_size=json["total_disk_size"],
+            count_first_opinion=json["count_first_opinion"],
+            count_second_opinion=json["count_second_opinion"]
         )
 
 
