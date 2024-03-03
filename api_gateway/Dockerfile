@@ -28,4 +28,4 @@ COPY pyproject.toml /client/
 RUN poetry install --only=main --no-interaction --no-ansi
 COPY . /client
 
-ENTRYPOINT [ "poetry", "run", "python", "-m", "gateway" ]
+ENTRYPOINT [ "poetry", "run", "python", "-m", "api_gateway" ]
