@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "api-gateway"
+name = "gateway"
 version = "0.1.0"
 description = ""
 authors = ["Andrey Kazackov <AndreyKazackoB@yandex.ru>"]
@@ -25,7 +25,7 @@ poethepoet = "^0.25.0"
 poetry-dotenv-plugin = "^0.2.0"
 
 [tool.poe.tasks]
-run = "poetry run python -m gateway"
+run = "poetry run python -m api_gateway"
 
 [build-system]
 requires = ["poetry-core"]

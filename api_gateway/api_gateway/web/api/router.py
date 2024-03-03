@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from gateway.web.api import (
+from api_gateway.web.api import (
     user_service,
     tatcami,
 )
