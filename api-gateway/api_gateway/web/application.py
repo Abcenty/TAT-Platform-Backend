@@ -1,6 +1,7 @@
-from importlib import metadata
 import aiohttp
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from api_gateway.settings import settings
 from fastapi.responses import UJSONResponse
 
 from api_gateway.logging import configure_logging
@@ -40,4 +41,11 @@ def get_app() -> FastAPI:
     # Main router for the API.
     app.include_router(router=api_router, prefix="/api")
 
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=settings.origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
     return app

@@ -3,7 +3,6 @@ from pathlib import Path
 from tempfile import gettempdir
 from typing import List
 from dotenv import load_dotenv
-import os
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 load_dotenv()

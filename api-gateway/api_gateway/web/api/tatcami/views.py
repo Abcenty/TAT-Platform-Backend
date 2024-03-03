@@ -3,15 +3,21 @@ from uuid import UUID
 
 from fastapi import APIRouter, Header, status
 
-from gateway import logging
-from gateway.web.api.user_service.exceptions import AuthorizationError
-from gateway.services.user_service.lifetime import user_service_post_session
-from gateway.services.tatcami.lifetime import tatcami_get_session
-from gateway.web.api.tatcami.exceptions import (
-    GetDevicesOnOrganizationsError, GetGeneralStatisticsError,
-    GetStatisticsOnOrganizationsError, InvalidOrganizationIdError)
-from gateway.web.exceptions import (AbstractError, BadRequest,
-                                    DetailedHTTPException)
+from api_gateway import logging
+from api_gateway.web.api.user_service.exceptions import AuthorizationError
+from api_gateway.services.user_service.lifetime import user_service_post_session
+from api_gateway.services.tatcami.lifetime import tatcami_get_session
+from api_gateway.web.api.tatcami.exceptions import (
+    GetDevicesOnOrganizationsError,
+    GetGeneralStatisticsError,
+    GetStatisticsOnOrganizationsError,
+    InvalidOrganizationIdError,
+)
+from api_gateway.web.exceptions import (
+    AbstractError,
+    BadRequest,
+    DetailedHTTPException,
+)
 
 router = APIRouter()
 
@@ -31,9 +37,9 @@ async def get_general_statistics(token: Annotated[str | None, Header()]):
         GetGeneralStatisticsError: Ошибка при получении общей статистики с ТатЦАМи
     """
 
-    auth = await user_service_post_session("me", headers={'Authorization': token})
-    if 'message' in auth:
-        if (auth['message'] == 'Unauthenticated.'):
+    auth = await user_service_post_session("me", headers={"Authorization": token})
+    if "message" in auth:
+        if auth["message"] == "Unauthenticated.":
             raise AuthorizationError()
 
     try:
@@ -64,9 +70,9 @@ async def get_organizations_statistics(token: Annotated[str | None, Header()]):
         GetStatisticsOnOrganizationsError: Ошибка при получении статистики по организациям с ТатЦАМи
     """
 
-    auth = await user_service_post_session("me", headers={'Authorization': token})
-    if 'message' in auth:
-        if (auth['message'] == 'Unauthenticated.'):
+    auth = await user_service_post_session("me", headers={"Authorization": token})
+    if "message" in auth:
+        if auth["message"] == "Unauthenticated.":
             raise AuthorizationError()
 
     try:
@@ -89,7 +95,10 @@ async def get_organizations_statistics(token: Annotated[str | None, Header()]):
         status.HTTP_500_INTERNAL_SERVER_ERROR: {"model": DetailedHTTPException},
     },
 )
-async def get_devices_of_organization(token: Annotated[str | None, Header()], organization_id: UUID):
+async def get_devices_of_organization(
+    token: Annotated[str | None, Header()],
+    organization_id: UUID,
+):
     """Получение устройств организации
 
     Args:
@@ -100,13 +109,15 @@ async def get_devices_of_organization(token: Annotated[str | None, Header()], or
         GetDevicesOnOrganizationsError: Ошибка при получении устройств организации с ТатЦАМи
     """
 
-    auth = await user_service_post_session("me", headers={'Authorization': token})
-    if 'message' in auth:
-        if (auth['message'] == 'Unauthenticated.'):
+    auth = await user_service_post_session("me", headers={"Authorization": token})
+    if "message" in auth:
+        if auth["message"] == "Unauthenticated.":
             raise AuthorizationError()
 
     try:
-        return await tatcami_get_session(f"api/v1/statistics/organizations/{organization_id}")
+        return await tatcami_get_session(
+            f"api/v1/statistics/organizations/{organization_id}",
+        )
     except AbstractError as error:
         if error.message == "InvalidOrganizationIdError":
             raise InvalidOrganizationIdError()
