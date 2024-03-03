@@ -1,7 +1,8 @@
 import asyncio
 import logging
 import multiprocessing
-
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 from api_gateway.settings import settings
 from api_gateway.web.application import get_app
@@ -41,6 +42,13 @@ def main() -> None:
         }
 
         StandaloneApplication(app, options).run()
+    app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 if __name__ == "__main__":
