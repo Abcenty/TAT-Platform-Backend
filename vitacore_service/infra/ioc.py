@@ -4,10 +4,12 @@ from typing import AsyncContextManager
 import aiohttp
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession
 
-from vitacore_service.adapters.db.providers import get_db_departments_gateway, get_uow
-from vitacore_service.adapters.http.providers import get_http_departments_gateway
+from vitacore_service.adapters.db.providers import get_db_departments_gateway, get_uow, get_db_patients_gateway
+from vitacore_service.adapters.http.providers import get_http_departments_gateway, get_http_patients_gateway
 from vitacore_service.application.departments.get_departments import GetDepartments
+from vitacore_service.application.patients.get_patient import GetPatient
 from vitacore_service.domain.services.departments import DepartmentsService
+from vitacore_service.domain.services.patients import PatientsService
 from vitacore_service.infra.config import get_settings
 from vitacore_service.presentation.interactor_factory import InteractorFactory
 
@@ -24,5 +26,16 @@ class IoC(InteractorFactory):
                     http_departments_reader=get_http_departments_gateway(aiohttp_session, get_settings()),
                     db_departments_saver=get_db_departments_gateway(db_session),
                     departments_service=DepartmentsService(),
+                    uow=get_uow(db_session)
+                )
+
+    @asynccontextmanager
+    async def get_patient(self) -> AsyncContextManager[GetPatient]:
+        async with self._async_session_factory() as db_session:
+            async with aiohttp.ClientSession() as aiohttp_session:
+                yield GetPatient(
+                    http_patients_reader=get_http_patients_gateway(aiohttp_session, get_settings()),
+                    db_patients_saver=get_db_patients_gateway(db_session),
+                    patients_service=PatientsService(),
                     uow=get_uow(db_session)
                 )
