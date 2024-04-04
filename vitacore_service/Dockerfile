@@ -29,4 +29,4 @@ RUN poetry install --only=main --no-interaction --no-ansi
 
 COPY vitacore_service/ /vitacore_service/
 
-CMD ["poetry", "run", "python", "/vitacore_service/infra/http_runner.py"]
+CMD ["poetry", "run", "python", "/vitacore_service/infra/http_app.py"]
