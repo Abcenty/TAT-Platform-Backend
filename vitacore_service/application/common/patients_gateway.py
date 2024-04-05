@@ -2,7 +2,7 @@ from abc import abstractmethod
 from typing import Protocol
 from uuid import UUID
 
-from domain.models.patients import PatientDTO
+from vitacore_service.domain.models.patients import PatientDTO
 
 
 class PatientSaver(Protocol):

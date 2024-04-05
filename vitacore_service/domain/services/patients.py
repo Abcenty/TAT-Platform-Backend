@@ -1,7 +1,7 @@
 from uuid import UUID
 
-from domain.models.patients import PatientDTO
-from domain.services.base import BaseService
+from vitacore_service.domain.models.patients import PatientDTO
+from vitacore_service.domain.services.base import BaseService
 
 
 class PatientsService(BaseService):
