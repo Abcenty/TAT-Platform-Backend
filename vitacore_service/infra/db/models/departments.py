@@ -9,10 +9,10 @@ from vitacore_service.infra.db.models.base import Base
 
 
 class Department(Base):
-    __tablename__ = 'department'
+    __tablename__ = "department"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    parent_id: Mapped[UUID | None] = mapped_column(ForeignKey('department.id'))
+    parent_id: Mapped[UUID | None] = mapped_column(ForeignKey("department.id"))
     code: Mapped[str] = mapped_column(nullable=False)
     fullname: Mapped[str] = mapped_column(nullable=False)
     shortname: Mapped[str] = mapped_column(nullable=False)
@@ -23,4 +23,4 @@ class Department(Base):
     address: Mapped[list[dict]] = mapped_column(JSONB)
     contacts: Mapped[list[dict]] = mapped_column(JSONB)
 
-    parent: Mapped['Department'] = relationship('Department')
+    parent: Mapped["Department"] = relationship("Department")

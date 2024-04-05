@@ -7,17 +7,17 @@ from vitacore_service.domain.services.base import BaseService
 class DepartmentsService(BaseService):
     @staticmethod
     def create(
-            id: UUID,
-            parent_id: UUID | None,
-            code: str,
-            fullname: str,
-            shortname: str,
-            type: str,
-            inn: str,
-            kpp: str,
-            ogrn: str,
-            address: list[dict],
-            contacts: list[dict]
+        id: UUID,
+        parent_id: UUID | None,
+        code: str,
+        fullname: str,
+        shortname: str,
+        type: str,
+        inn: str,
+        kpp: str,
+        ogrn: str,
+        address: list[dict],
+        contacts: list[dict],
     ) -> DepartmentDTO:
         return DepartmentDTO(
             id=id,
@@ -30,5 +30,5 @@ class DepartmentsService(BaseService):
             kpp=kpp,
             ogrn=ogrn,
             address=address,
-            contacts=contacts
+            contacts=contacts,
         )

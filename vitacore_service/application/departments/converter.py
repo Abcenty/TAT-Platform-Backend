@@ -14,5 +14,5 @@ def department_dto_to_response(department: DepartmentDTO) -> DepartmentRead:
         kpp=department.kpp,
         ogrn=department.ogrn,
         address=department.address,
-        contacts=department.contacts
+        contacts=department.contacts,
     )

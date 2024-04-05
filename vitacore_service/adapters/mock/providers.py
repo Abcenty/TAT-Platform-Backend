@@ -1,4 +1,6 @@
-from vitacore_service.adapters.mock.departments.departments_gateway import MockDepartmentsGateway
+from vitacore_service.adapters.mock.departments.departments_gateway import (
+    MockDepartmentsGateway,
+)
 from vitacore_service.adapters.mock.patients.patients_gateway import MockPatientsGateway
 
 

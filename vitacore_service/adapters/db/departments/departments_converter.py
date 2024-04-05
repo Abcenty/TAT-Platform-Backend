@@ -14,7 +14,7 @@ def department_db_to_dto(department: Department) -> DepartmentDTO:
         kpp=department.kpp,
         ogrn=department.ogrn,
         address=department.address,
-        contacts=department.contacts
+        contacts=department.contacts,
     )
 
 
@@ -30,5 +30,5 @@ def department_dto_to_db(department: DepartmentDTO) -> Department:
         kpp=department.kpp,
         ogrn=department.ogrn,
         address=department.address,
-        contacts=department.contacts
+        contacts=department.contacts,
     )

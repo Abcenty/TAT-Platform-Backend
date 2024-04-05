@@ -9,7 +9,7 @@ from vitacore_service.presentation.interactor_factory import InteractorFactory
 
 
 def get_ioc(
-        session_factory: Annotated[async_sessionmaker, Depends(get_async_sessionmaker)]
+    session_factory: Annotated[async_sessionmaker, Depends(get_async_sessionmaker)],
 ) -> InteractorFactory:
     return IoC(session_factory)
 

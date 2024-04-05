@@ -1,18 +1,24 @@
 from vitacore_service.application.common.interactor import Interactor
-from vitacore_service.application.common.patients_gateway import PatientReader, PatientSaver
+from vitacore_service.application.common.patients_gateway import (
+    PatientReader,
+    PatientSaver,
+)
 from vitacore_service.application.common.uow import UoW
 from vitacore_service.application.patients.converter import patient_dto_to_response
-from vitacore_service.application.patients.schemas import GetPatientRequest, GetPatientResponse
+from vitacore_service.application.patients.schemas import (
+    GetPatientRequest,
+    GetPatientResponse,
+)
 from vitacore_service.domain.services.patients import PatientsService
 
 
 class GetPatient(Interactor[GetPatientRequest, GetPatientResponse]):
     def __init__(
-            self,
-            http_patients_reader: PatientReader,
-            db_patients_saver: PatientSaver,
-            patients_service: PatientsService,
-            uow: UoW
+        self,
+        http_patients_reader: PatientReader,
+        db_patients_saver: PatientSaver,
+        patients_service: PatientsService,
+        uow: UoW,
     ):
         self.http_patients_reader = http_patients_reader
         self.db_patients_saver = db_patients_saver
@@ -33,7 +39,7 @@ class GetPatient(Interactor[GetPatientRequest, GetPatientResponse]):
             documents=patient.documents,
             address=patient.address,
             contacts=patient.monitoring,
-            monitoring=patient.contacts
+            monitoring=patient.contacts,
         )
 
         await self.db_patients_saver.create(patient)

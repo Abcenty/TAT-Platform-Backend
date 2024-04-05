@@ -14,7 +14,7 @@ from vitacore_service.infra.db.models.base import Base
 
 
 async def get_engine(
-        settings: Annotated[Settings, Depends(get_settings)]
+    settings: Annotated[Settings, Depends(get_settings)],
 ) -> AsyncGenerator[AsyncEngine, None]:
     """
     Creates an asynchronous engine.
@@ -25,15 +25,15 @@ async def get_engine(
         settings.database_url,
         pool_pre_ping=True,
     )
-    logging.info('Engine was created.')
+    logging.info("Engine was created.")
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
-        logging.info('Tables were created.')
+        logging.info("Tables were created.")
 
     yield engine
 
     await engine.dispose()
-    logging.info('Engine was disposed.')
+    logging.info("Engine was disposed.")
 
 
 async def get_async_sessionmaker(
@@ -49,6 +49,6 @@ async def get_async_sessionmaker(
         expire_on_commit=False,
         class_=AsyncSession,
     )
-    logging.info('Session factory was initialized')
+    logging.info("Session factory was initialized")
 
     return session_factory

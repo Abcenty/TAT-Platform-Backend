@@ -1,5 +1,5 @@
-from application.patients.schemas import GetPatientResponse
-from domain.models.patients import PatientDTO
+from vitacore_service.application.patients.schemas import GetPatientResponse
+from vitacore_service.domain.models.patients import PatientDTO
 
 
 def patient_dto_to_response(patient: PatientDTO) -> GetPatientResponse:
@@ -14,5 +14,5 @@ def patient_dto_to_response(patient: PatientDTO) -> GetPatientResponse:
         documents=patient.documents,
         address=patient.address,
         monitoring=patient.monitoring,
-        contacts=patient.contacts
+        contacts=patient.contacts,
     )

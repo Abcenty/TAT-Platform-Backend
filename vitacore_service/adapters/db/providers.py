@@ -1,7 +1,9 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from vitacore_service.adapters.db.patients.patients_gateway import DBPatientsGateway
-from vitacore_service.adapters.db.departments.departments_gateway import DBDepartmentsGateway
+from vitacore_service.adapters.db.departments.departments_gateway import (
+    DBDepartmentsGateway,
+)
 from vitacore_service.adapters.db.uow import SAUnitOfWork
 
 

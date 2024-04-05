@@ -14,7 +14,7 @@ def patient_dto_to_db(patient: PatientDTO) -> Patient:
         documents=patient.documents,
         address=patient.address,
         monitoring=patient.monitoring,
-        contacts=patient.contacts
+        contacts=patient.contacts,
     )
 
 
@@ -30,5 +30,5 @@ def patient_db_to_dto(patient: Patient) -> PatientDTO:
         documents=patient.documents,
         address=patient.address,
         monitoring=patient.monitoring,
-        contacts=patient.contacts
+        contacts=patient.contacts,
     )

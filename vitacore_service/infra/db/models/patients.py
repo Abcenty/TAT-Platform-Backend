@@ -8,7 +8,7 @@ from vitacore_service.infra.db.models import Base
 
 
 class Patient(Base):
-    __tablename__ = 'patient'
+    __tablename__ = "patient"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
     snils: Mapped[str] = mapped_column(nullable=False)

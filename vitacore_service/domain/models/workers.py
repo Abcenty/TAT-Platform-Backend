@@ -28,7 +28,7 @@ class WorkerDTO(BaseModel):
     SNILS: str
     lastName: str
     firstName: str
-    middleName: str = ''
+    middleName: str = ""
     birthDate: date
     dateBegin: date
     dateEnd: date

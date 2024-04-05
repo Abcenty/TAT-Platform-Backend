@@ -7,17 +7,17 @@ from domain.services.base import BaseService
 class PatientsService(BaseService):
     @staticmethod
     def create(
-            id: UUID,
-            snils: str,
-            last_name: str,
-            first_name: str,
-            middle_name: str,
-            gender: str,
-            birth_date: str,
-            documents: list[dict],
-            address: list[dict],
-            contacts: list[dict],
-            monitoring: list[dict] | None = None
+        id: UUID,
+        snils: str,
+        last_name: str,
+        first_name: str,
+        middle_name: str,
+        gender: str,
+        birth_date: str,
+        documents: list[dict],
+        address: list[dict],
+        contacts: list[dict],
+        monitoring: list[dict] | None = None,
     ):
         return PatientDTO(
             id=id,
@@ -30,5 +30,5 @@ class PatientsService(BaseService):
             documents=documents,
             address=address,
             monitoring=monitoring,
-            contacts=contacts
+            contacts=contacts,
         )

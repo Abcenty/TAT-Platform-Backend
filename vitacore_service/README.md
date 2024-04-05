@@ -2,5 +2,4 @@
 
 - [Документация к API VitaCore](https://wiki.vitacore.ru/pages/viewpage.action?pageId=404881717)
 
---- 
-
+---

@@ -10,33 +10,33 @@ class MockPatientsGateway(PatientReader):
         return PatientDTO(
             id=patient_id,
             snils=str(random.randint(100, 1000)),
-            last_name='test',
-            first_name='test',
-            middle_name='test',
-            gender='male',
-            birth_date='01.01.2000',
+            last_name="test",
+            first_name="test",
+            middle_name="test",
+            gender="male",
+            birth_date="01.01.2000",
             documents=[
                 {
-                    'type': 'test',
-                    'display': 'test'
-                }
+                    "type": "test",
+                    "display": "test",
+                },
             ],
             address=[
                 {
-                    'type': 'test',
-                    'display': 'test'
-                }
+                    "type": "test",
+                    "display": "test",
+                },
             ],
             monitoring=[
                 {
-                    'type': 'test',
-                    'display': 'test'
-                }
+                    "type": "test",
+                    "display": "test",
+                },
             ],
             contacts=[
                 {
-                    'type': 'test',
-                    'display': 'test'
-                }
-            ]
+                    "type": "test",
+                    "display": "test",
+                },
+            ],
         )
