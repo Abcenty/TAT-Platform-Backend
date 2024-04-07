@@ -15,7 +15,7 @@ class DBDepartmentsGateway(DepartmentSaver):
 
     async def bulk_save_with_update(self, departments: list[DepartmentDTO]) -> None:
         """
-        Adds several organizations to the database. When there is a conflict, an update occurs.
+        Adds several departments to the database. When there is a conflict, an update occurs.
 
         !!! Used insert from postgresql dialect, when changing the DBMS, you will have to update this method
         """
