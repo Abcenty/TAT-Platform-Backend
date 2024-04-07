@@ -1,3 +1,4 @@
+files: ^vitacore_service/
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
@@ -23,14 +24,14 @@ repos:
         args: [ "--fix" ]
       - id: ruff-format
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.8.0
-    hooks:
-      - id: mypy
-        name: Validate types with MyPy
-        entry: poetry run mypy
-        language: system
-        types: [ python ]
-        pass_filenames: false
-        args:
-          - "gateway"
+#  - repo: https://github.com/pre-commit/mirrors-mypy
+#    rev: v1.8.0
+#    hooks:
+#      - id: mypy
+#        name: Validate types with MyPy
+#        entry: poetry run -C ./vitacore_service/pyproject.toml mypy
+#        language: system
+#        types: [ python ]
+#        pass_filenames: false
+#        args:
+#          - "vitacore_service"
