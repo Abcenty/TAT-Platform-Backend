@@ -12,6 +12,11 @@ class DBWorkersGateway(WorkerSaver):
         self.session = session
 
     async def bulk_save_with_update(self, workers: list[WorkerDTO]) -> None:
+        """
+        Adds several workers to the database. When there is a conflict, an update occurs.
+
+        !!! Used insert from postgresql dialect, when changing the DBMS, you will have to update this method
+        """
         db_workers = [worker_dto_to_db(worker) for worker in workers]
 
         stmt = insert(Worker).values(
