@@ -29,7 +29,7 @@ class FindPatients(Interactor[FindPatientsRequest, list[PatientRead]]):
             docnum=data.docnum,
         )
 
-        await self.db_patients_saver.save_bulk(patients)
+        await self.db_patients_saver.bulk_save_with_update(patients)
         await self.uow.commit()
 
         return [patient_dto_to_response(patient) for patient in patients]

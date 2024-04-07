@@ -13,7 +13,7 @@ class DBPositionsGateway(PositionSaver):
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def save_bulk(self, positions: list[PositionDTO]) -> None:
+    async def bulk_save_with_update(self, positions: list[PositionDTO]) -> None:
         db_positions = [position_dto_to_db(position) for position in positions]
 
         stmt = insert(Position).values(

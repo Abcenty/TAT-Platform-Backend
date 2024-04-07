@@ -7,11 +7,11 @@ from vitacore_service.domain.models.patients import PatientDTO
 
 class PatientSaver(Protocol):
     @abstractmethod
-    async def save(self, patient: PatientDTO) -> None:
+    async def save_with_update(self, patient: PatientDTO) -> None:
         raise NotImplementedError
 
     @abstractmethod
-    async def save_bulk(self, patients: list[PatientDTO]) -> None:
+    async def bulk_save_with_update(self, patients: list[PatientDTO]) -> None:
         raise NotImplementedError
 
 

@@ -6,11 +6,7 @@ from vitacore_service.domain.models.departments import DepartmentDTO
 
 class DepartmentSaver(Protocol):
     @abstractmethod
-    async def create(self, department: DepartmentDTO) -> None:
-        raise NotImplementedError
-
-    @abstractmethod
-    async def create_bulk(self, departments: list[DepartmentDTO]) -> None:
+    async def bulk_save_with_update(self, departments: list[DepartmentDTO]) -> None:
         raise NotImplementedError
 
 

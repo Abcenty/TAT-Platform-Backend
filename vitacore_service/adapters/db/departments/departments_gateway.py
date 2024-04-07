@@ -13,13 +13,7 @@ class DBDepartmentsGateway(DepartmentSaver):
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def create(self, department: DepartmentDTO) -> None:
-        db_department = department_dto_to_db(department)
-
-        self.session.add(db_department)
-        await self.session.flush([db_department])
-
-    async def create_bulk(self, departments: list[DepartmentDTO]) -> None:
+    async def bulk_save_with_update(self, departments: list[DepartmentDTO]) -> None:
         """
         Adds several organizations to the database. When there is a conflict, an update occurs.
 

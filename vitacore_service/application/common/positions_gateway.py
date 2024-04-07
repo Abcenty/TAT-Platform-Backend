@@ -6,7 +6,7 @@ from vitacore_service.domain.models.positions import PositionDTO
 
 class PositionSaver(Protocol):
     @abstractmethod
-    async def save_bulk(self, positions: list[PositionDTO]):
+    async def bulk_save_with_update(self, positions: list[PositionDTO]):
         raise NotImplementedError
 
 

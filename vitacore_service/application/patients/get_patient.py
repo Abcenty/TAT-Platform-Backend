@@ -42,7 +42,7 @@ class GetPatient(Interactor[GetPatientRequest, PatientRead]):
             monitoring=patient.contacts,
         )
 
-        await self.db_patients_saver.save(patient)
+        await self.db_patients_saver.save_with_update(patient)
         await self.uow.commit()
 
         return patient_dto_to_response(patient)

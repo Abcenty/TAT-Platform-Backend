@@ -50,7 +50,7 @@ class GetDepartments(Interactor[GetDepartmentsRequest, DepartmentRead]):
             for department in departments
         ]
 
-        await self.db_departments_saver.create_bulk(departments)
+        await self.db_departments_saver.bulk_save_with_update(departments)
         await self.uow.commit()
 
         return [department_dto_to_response(department) for department in departments]

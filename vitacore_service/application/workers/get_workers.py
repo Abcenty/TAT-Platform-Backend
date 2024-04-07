@@ -25,13 +25,13 @@ class GetWorkers(Interactor[GetWorkersRequest, WorkerRead]):
     async def __call__(self, data: GetWorkersRequest) -> list[WorkerRead]:
         workers = await self.http_workers_reader.get_by_department(data.department_id)
 
-        await self.db_workers_saver.save_bulk(workers)
+        await self.db_workers_saver.bulk_save_with_update(workers)
 
         all_positions = list()
         for worker in workers:
             all_positions.extend(worker.positions)
 
-        await self.db_positions_saver.save_bulk(all_positions)
+        await self.db_positions_saver.bulk_save_with_update(all_positions)
 
         await self.uow.commit()
 

@@ -11,7 +11,7 @@ class DBPatientsGateway(PatientSaver):
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def save(self, patient: PatientDTO) -> None:
+    async def save_with_update(self, patient: PatientDTO) -> None:
         """
         Adds patient to the database. When there is a conflict, an update occurs.
 
@@ -53,7 +53,7 @@ class DBPatientsGateway(PatientSaver):
 
         await self.session.execute(stmt)
 
-    async def save_bulk(self, patients: list[PatientDTO]) -> None:
+    async def bulk_save_with_update(self, patients: list[PatientDTO]) -> None:
         """
         Adds several patients to the database. When there is a conflict, an update occurs.
 

@@ -11,7 +11,7 @@ class DBWorkersGateway(WorkerSaver):
     def __init__(self, session: AsyncSession):
         self.session = session
 
-    async def save_bulk(self, workers: list[WorkerDTO]) -> None:
+    async def bulk_save_with_update(self, workers: list[WorkerDTO]) -> None:
         db_workers = [worker_dto_to_db(worker) for worker in workers]
 
         stmt = insert(Worker).values(

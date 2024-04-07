@@ -7,7 +7,7 @@ from vitacore_service.domain.models.workers import WorkerDTO
 
 class WorkerSaver(Protocol):
     @abstractmethod
-    async def save_bulk(self, workers: list[WorkerDTO]) -> None:
+    async def bulk_save_with_update(self, workers: list[WorkerDTO]) -> None:
         raise NotImplementedError
 
 
