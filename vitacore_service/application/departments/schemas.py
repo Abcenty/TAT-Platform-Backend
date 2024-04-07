@@ -1,6 +1,7 @@
+from typing import Annotated
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class TunedModel(BaseModel):
@@ -20,17 +21,30 @@ class TunedModel(BaseModel):
 
 
 class DepartmentRead(TunedModel):
-    id: UUID
-    parentId: UUID | None
-    code: str
-    fullname: str
-    shortname: str
-    type: str
-    inn: str
-    kpp: str
-    ogrn: str
-    address: list[dict]
-    contacts: list[dict]
+    id: Annotated[UUID, Field(description="Идентификатор МО")]
+    parentId: Annotated[
+        UUID | None,
+        Field(description="Идентификатор вышестоящего подразделения"),
+    ]
+    code: Annotated[str, Field(description="Региональный код или код ТФОМС")]
+    fullname: Annotated[str, Field(description="Полное наименование")]
+    shortname: Annotated[str, Field(description="Краткое наименование")]
+    type: Annotated[
+        str,
+        Field(
+            description=(
+                "Тип подразделения:"
+                "* Для МО: «Юридический»"
+                "* Для филиалов:"
+                "Стационар / Поликлиника / ФАП / Амбулатория"
+            ),
+        ),
+    ]
+    inn: Annotated[str, Field(description="ИНН")]
+    kpp: Annotated[str, Field(description="КПП")]
+    ogrn: Annotated[str, Field(description="ОГРН")]
+    address: Annotated[list[dict], Field(description="Список адресов")]
+    contacts: Annotated[list[dict], Field(description="Список контактов")]
 
 
 class GetDepartmentsRequest(TunedModel):

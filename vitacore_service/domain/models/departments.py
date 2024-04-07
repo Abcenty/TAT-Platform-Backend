@@ -17,7 +17,7 @@ from pydantic import BaseModel
 
 class DepartmentDTO(BaseModel):
     id: UUID
-    parent_id: UUID | None  # In VitaCore this field is "parentId"
+    parent_id: UUID | None
     code: str
     fullname: str
     shortname: str
