@@ -8,13 +8,17 @@ from vitacore_service.adapters.db.providers import (
     get_db_departments_gateway,
     get_uow,
     get_db_patients_gateway,
+    get_db_positions_gateway,
+    get_db_workers_gateway,
 )
 from vitacore_service.adapters.http.providers import (
     get_http_departments_gateway,
     get_http_patients_gateway,
+    get_http_workers_gateway,
 )
 from vitacore_service.application.departments.get_departments import GetDepartments
 from vitacore_service.application.patients.get_patient import GetPatient
+from vitacore_service.application.workers.get_workers import GetWorkers
 from vitacore_service.domain.services.departments import DepartmentsService
 from vitacore_service.domain.services.patients import PatientsService
 from vitacore_service.infra.config import get_settings
@@ -31,10 +35,25 @@ class IoC(InteractorFactory):
             async with aiohttp.ClientSession() as aiohttp_session:
                 yield GetDepartments(
                     http_departments_reader=get_http_departments_gateway(
-                        aiohttp_session, get_settings()
+                        aiohttp_session,
+                        get_settings(),
                     ),
                     db_departments_saver=get_db_departments_gateway(db_session),
                     departments_service=DepartmentsService(),
+                    uow=get_uow(db_session),
+                )
+
+    @asynccontextmanager
+    async def get_workers_by_department(self) -> AsyncContextManager[GetWorkers]:
+        async with self._async_session_factory() as db_session:
+            async with aiohttp.ClientSession() as aiohttp_session:
+                yield GetWorkers(
+                    http_workers_reader=get_http_workers_gateway(
+                        aiohttp_session,
+                        get_settings(),
+                    ),
+                    db_positions_saver=get_db_positions_gateway(db_session),
+                    db_workers_saver=get_db_workers_gateway(db_session),
                     uow=get_uow(db_session),
                 )
 
@@ -44,7 +63,8 @@ class IoC(InteractorFactory):
             async with aiohttp.ClientSession() as aiohttp_session:
                 yield GetPatient(
                     http_patients_reader=get_http_patients_gateway(
-                        aiohttp_session, get_settings()
+                        aiohttp_session,
+                        get_settings(),
                     ),
                     db_patients_saver=get_db_patients_gateway(db_session),
                     patients_service=PatientsService(),

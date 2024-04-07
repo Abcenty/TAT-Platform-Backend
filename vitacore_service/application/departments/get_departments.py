@@ -28,7 +28,8 @@ class GetDepartments(Interactor[GetDepartmentsRequest, DepartmentRead]):
         self.departments_service = departments_service
 
     async def __call__(
-        self, data: GetDepartmentsRequest = None
+        self,
+        data: GetDepartmentsRequest = None,
     ) -> list[DepartmentRead]:
         departments = await self.http_departments_reader.get_all()
 

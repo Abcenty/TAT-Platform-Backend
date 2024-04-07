@@ -16,7 +16,8 @@ settings = get_settings()
 # access to the values within the .ini file in use.
 config = context.config
 config.set_main_option(
-    "sqlalchemy.url", settings.database_url.render_as_string(hide_password=False)
+    "sqlalchemy.url",
+    settings.database_url.render_as_string(hide_password=False),
 )
 
 # Interpret the config file for Python logging.

@@ -7,16 +7,16 @@ class TunedModel(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
 
-# class AddressRead(TunedModel):
-#     type: str
-#     display: str
-#     latitude: str | None
-#     longitude: str | None
-#
-#
-# class ContactRead(TunedModel):
-#     type: str
-#     display: str
+"""class AddressRead(TunedModel):
+    type: str
+    display: str
+    latitude: str | None
+    longitude: str | None
+
+
+class ContactRead(TunedModel):
+    type: str
+    display: str"""
 
 
 class DepartmentRead(TunedModel):

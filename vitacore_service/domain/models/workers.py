@@ -1,37 +1,24 @@
 from datetime import date
-from typing import Any
 from uuid import UUID
 
 from pydantic import BaseModel
 
-
-class PositionDTO(BaseModel):
-    id: UUID
-    dateBegin: date
-    departmentId: UUID
-    departmentName: str
-    positionName: str
-    positionRate: Any = None
-    positionFedCode: str
-    positionRegName: str | None
-    positionSpecialityCode: str | None = None
-    positionSpecialityName: str | None = None
+from vitacore_service.domain.models.positions import PositionDTO
 
 
-class ContactDTO(BaseModel):
-    type: str
-    display: str
+# class ContactDTO(BaseModel):
+#     type: str
+#     display: str
 
 
 class WorkerDTO(BaseModel):
     id: UUID
-    SNILS: str
-    lastName: str
-    firstName: str
-    middleName: str = ""
-    birthDate: date
-    dateBegin: date
-    dateEnd: date
+    snils: str
+    last_name: str
+    first_name: str
+    middle_name: str = ""
+    birth_date: date
+    date_begin: date | None = None
+    date_end: date | None = None
     positions: list[PositionDTO]
-    contacts: list[ContactDTO]
-
+    contacts: list[dict]
