@@ -7,9 +7,9 @@ class GetPatientRequest(BaseModel):
     patient_id: UUID
 
 
-class GetPatientResponse(BaseModel):
+class PatientRead(BaseModel):
     id: UUID
-    SNILS: str
+    SNILS: str | None
     lastName: str
     firstName: str
     middleName: str
@@ -18,4 +18,10 @@ class GetPatientResponse(BaseModel):
     documents: list[dict]
     address: list[dict]
     monitoring: list[dict] | None
-    contacts: list[dict]
+    contacts: list[dict] | None
+
+
+class FindPatientsRequest(BaseModel):
+    findstr: str | None
+    snils: str | None
+    docnum: str | None

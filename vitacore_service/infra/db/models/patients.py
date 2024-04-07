@@ -11,7 +11,7 @@ class Patient(Base):
     __tablename__ = "patient"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    snils: Mapped[str] = mapped_column(nullable=False)
+    snils: Mapped[str | None] = mapped_column(nullable=True)
     last_name: Mapped[str] = mapped_column(nullable=False)
     first_name: Mapped[str] = mapped_column(nullable=False)
     middle_name: Mapped[str] = mapped_column(nullable=False)
@@ -20,4 +20,4 @@ class Patient(Base):
     documents: Mapped[list[dict]] = mapped_column(JSONB, nullable=False)
     address: Mapped[list[dict]] = mapped_column(JSONB, nullable=False)
     monitoring: Mapped[list[dict] | None] = mapped_column(JSONB, nullable=True)
-    contacts: Mapped[list[dict]] = mapped_column(JSONB, nullable=False)
+    contacts: Mapped[list[dict | None]] = mapped_column(JSONB, nullable=True)

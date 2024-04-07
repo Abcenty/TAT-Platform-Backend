@@ -17,6 +17,7 @@ from vitacore_service.adapters.http.providers import (
     get_http_workers_gateway,
 )
 from vitacore_service.application.departments.get_departments import GetDepartments
+from vitacore_service.application.patients.find_patients import FindPatients
 from vitacore_service.application.patients.get_patient import GetPatient
 from vitacore_service.application.workers.get_workers import GetWorkers
 from vitacore_service.domain.services.departments import DepartmentsService
@@ -68,5 +69,18 @@ class IoC(InteractorFactory):
                     ),
                     db_patients_saver=get_db_patients_gateway(db_session),
                     patients_service=PatientsService(),
+                    uow=get_uow(db_session),
+                )
+
+    @asynccontextmanager
+    async def find_patients(self) -> AsyncContextManager[FindPatients]:
+        async with self._async_session_factory() as db_session:
+            async with aiohttp.ClientSession() as aiohttp_session:
+                yield FindPatients(
+                    http_patients_reader=get_http_patients_gateway(
+                        aiohttp_session,
+                        get_settings(),
+                    ),
+                    db_patients_saver=get_db_patients_gateway(db_session),
                     uow=get_uow(db_session),
                 )

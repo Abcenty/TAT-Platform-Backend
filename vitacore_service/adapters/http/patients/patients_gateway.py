@@ -25,3 +25,27 @@ class HttpPatientsGateway(PatientReader):
             result = await response.json()
 
         return dict_to_patient_dto(result)
+
+    async def find(
+        self,
+        findstr: str | None,
+        snils: str | None,
+        docnum: str | None,
+    ) -> list[PatientDTO]:
+        url = self.vitacore_url + "forTis/find_patients"
+
+        params = dict()
+        if findstr is not None:
+            params["findstr"] = findstr
+        if snils is not None:
+            params["snils"] = snils
+        if docnum is not None:
+            params["docnum"] = docnum
+
+        async with self.session.get(url, params=params) as response:
+            if not response.ok:
+                raise Exception
+
+            result = await response.json()
+
+        return [dict_to_patient_dto(patient_dict) for patient_dict in result]

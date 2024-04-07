@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 class PatientDTO(BaseModel):
     id: UUID
-    snils: str
+    snils: str | None = None
     last_name: str
     first_name: str
     middle_name: str
@@ -14,4 +14,4 @@ class PatientDTO(BaseModel):
     documents: list[dict]
     address: list[dict]
     monitoring: list[dict] | None = None
-    contacts: list[dict]
+    contacts: list[dict] | None = None

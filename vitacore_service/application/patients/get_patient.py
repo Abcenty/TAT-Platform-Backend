@@ -7,12 +7,12 @@ from vitacore_service.application.common.uow import UoW
 from vitacore_service.application.patients.converter import patient_dto_to_response
 from vitacore_service.application.patients.schemas import (
     GetPatientRequest,
-    GetPatientResponse,
+    PatientRead,
 )
 from vitacore_service.domain.services.patients import PatientsService
 
 
-class GetPatient(Interactor[GetPatientRequest, GetPatientResponse]):
+class GetPatient(Interactor[GetPatientRequest, PatientRead]):
     def __init__(
         self,
         http_patients_reader: PatientReader,
@@ -25,7 +25,7 @@ class GetPatient(Interactor[GetPatientRequest, GetPatientResponse]):
         self.patients_service = patients_service
         self.uow = uow
 
-    async def __call__(self, data: GetPatientRequest) -> GetPatientResponse:
+    async def __call__(self, data: GetPatientRequest) -> PatientRead:
         patient = await self.http_patients_reader.get(data.patient_id)
 
         patient = self.patients_service.create(
@@ -42,7 +42,7 @@ class GetPatient(Interactor[GetPatientRequest, GetPatientResponse]):
             monitoring=patient.contacts,
         )
 
-        await self.db_patients_saver.create(patient)
+        await self.db_patients_saver.save(patient)
         await self.uow.commit()
 
         return patient_dto_to_response(patient)

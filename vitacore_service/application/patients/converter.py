@@ -1,9 +1,9 @@
-from vitacore_service.application.patients.schemas import GetPatientResponse
+from vitacore_service.application.patients.schemas import PatientRead
 from vitacore_service.domain.models.patients import PatientDTO
 
 
-def patient_dto_to_response(patient: PatientDTO) -> GetPatientResponse:
-    return GetPatientResponse(
+def patient_dto_to_response(patient: PatientDTO) -> PatientRead:
+    return PatientRead(
         id=patient.id,
         SNILS=patient.snils,
         lastName=patient.last_name,

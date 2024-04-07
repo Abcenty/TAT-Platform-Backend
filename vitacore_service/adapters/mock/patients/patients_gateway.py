@@ -40,3 +40,53 @@ class MockPatientsGateway(PatientReader):
                 },
             ],
         )
+
+    async def find(
+        self,
+        findstr: str | None,
+        snils: str | None,
+        docnum: str | None,
+    ) -> list[PatientDTO]:
+        return [
+            PatientDTO(
+                id="132ae70c-5177-4c6a-be27-6eaee88d8563",
+                snils=str(random.randint(100, 1000)),
+                last_name="test",
+                first_name="test",
+                middle_name="test",
+                gender="male",
+                birth_date="01.01.2000",
+                documents=[
+                    {
+                        "type": "test",
+                        "display": "test",
+                    },
+                ],
+                address=[
+                    {
+                        "type": "test",
+                        "display": "test",
+                    },
+                ],
+            ),
+            PatientDTO(
+                id="222ae70c-5177-4c6a-be27-6eaee88d8222",
+                last_name="test",
+                first_name="test",
+                middle_name="test",
+                gender="male",
+                birth_date="01.01.2000",
+                documents=[
+                    {
+                        "type": "test",
+                        "display": "test",
+                    },
+                ],
+                address=[
+                    {
+                        "type": "test",
+                        "display": "test",
+                    },
+                ],
+            ),
+        ]
