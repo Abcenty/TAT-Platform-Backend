@@ -4,17 +4,29 @@ from uuid import UUID
 from fastapi import APIRouter, HTTPException, Query
 from starlette import status
 
+from vitacore_service.application.common.schemas import ErrorMessage
 from vitacore_service.application.patients.schemas import (
     GetPatientRequest,
     FindPatientsRequest,
     PatientRead,
 )
+from vitacore_service.domain.exceptions.vitacore import VitacoreError
 from vitacore_service.infra.dependencies import ioc_dep
 
 router = APIRouter()
 
 
-@router.get("/patient", response_model=PatientRead, name="Получить пациента по ID")
+@router.get(
+    "/patient",
+    response_model=PatientRead,
+    name="Получить пациента по ID",
+    responses={
+        530: {
+            "model": ErrorMessage,
+            "description": "Something went wrong with VitaCore... Check detail",
+        },
+    },
+)
 async def get_patient_by_id(
     ioc: ioc_dep,
     patient_id: Annotated[UUID, Query(title="ID пациента", description="ID пациента")],
@@ -26,12 +38,28 @@ async def get_patient_by_id(
     * Результат сохраняется в БД
     """
     async with ioc.get_patient() as get_patient:
-        return await get_patient(
-            GetPatientRequest(patient_id=patient_id),
-        )
+        try:
+            return await get_patient(
+                GetPatientRequest(patient_id=patient_id),
+            )
+        except VitacoreError as error:
+            raise HTTPException(
+                status_code=530,
+                detail=str(error),
+            )
 
 
-@router.get("/find_patients", response_model=list[PatientRead], name="Поиск пациентов")
+@router.get(
+    "/find_patients",
+    response_model=list[PatientRead],
+    name="Поиск пациентов",
+    responses={
+        530: {
+            "model": ErrorMessage,
+            "description": "Something went wrong with VitaCore... Check detail",
+        },
+    },
+)
 async def find_patients(
     ioc: ioc_dep,
     findstr: Annotated[
@@ -73,6 +101,12 @@ async def find_patients(
         )
 
     async with ioc.find_patients() as find_patients_func:
-        return await find_patients_func(
-            FindPatientsRequest(findstr=findstr, snils=snils, docnum=docnum),
-        )
+        try:
+            return await find_patients_func(
+                FindPatientsRequest(findstr=findstr, snils=snils, docnum=docnum),
+            )
+        except VitacoreError as error:
+            raise HTTPException(
+                status_code=530,
+                detail=str(error),
+            )

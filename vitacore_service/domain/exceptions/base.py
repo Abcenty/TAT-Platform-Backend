@@ -3,4 +3,6 @@ class DomainError(Exception):
         self.message = message
 
     def __str__(self) -> str:
-        return str(self.__class__.__name__)
+        return (
+            str(self.__class__.__name__) + f": {self.message}" if self.message else ""
+        )

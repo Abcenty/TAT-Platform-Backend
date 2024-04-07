@@ -1,9 +1,15 @@
+from json import JSONDecodeError
 from uuid import UUID
 
-from aiohttp import ClientSession
+from aiohttp import ClientSession, ServerConnectionError
 
 from vitacore_service.adapters.http.patients.patients_converter import (
     dict_to_patient_dto,
+)
+from vitacore_service.domain.exceptions.vitacore import (
+    VitacoreBadStatusError,
+    VitacoreBadResponseError,
+    VitacoreUnreachableError,
 )
 from vitacore_service.infra.config import Settings
 from vitacore_service.application.common.patients_gateway import PatientReader
@@ -18,11 +24,22 @@ class HttpPatientsGateway(PatientReader):
     async def get(self, patient_id: UUID) -> PatientDTO:
         url = self.vitacore_url + f"forTis/patient?patId={patient_id}"
 
-        async with self.session.get(url) as response:
-            if not response.ok:
-                raise Exception
+        try:
+            async with self.session.get(url) as response:
+                if not response.ok:
+                    raise VitacoreBadStatusError(f"Status code: {response.status}")
 
-            result = await response.json()
+                try:
+                    result = await response.json()
+                except (JSONDecodeError, TypeError):
+                    raise VitacoreBadResponseError(
+                        f"Invalid JSON response: {response.text}",
+                    )
+        except ServerConnectionError:
+            raise VitacoreUnreachableError()
+
+        if "firstName" not in result:
+            raise VitacoreBadResponseError(f"JSON with error: {result}")
 
         return dict_to_patient_dto(result)
 
@@ -42,10 +59,21 @@ class HttpPatientsGateway(PatientReader):
         if docnum is not None:
             params["docnum"] = docnum
 
-        async with self.session.get(url, params=params) as response:
-            if not response.ok:
-                raise Exception
+        try:
+            async with self.session.get(url) as response:
+                if not response.ok:
+                    raise VitacoreBadStatusError(f"Status code: {response.status}")
 
-            result = await response.json()
+                try:
+                    result = await response.json()
+                except (JSONDecodeError, TypeError):
+                    raise VitacoreBadResponseError(
+                        f"Invalid JSON response: {response.text}",
+                    )
+        except ServerConnectionError:
+            raise VitacoreUnreachableError()
+
+        if not isinstance(result, list):
+            raise VitacoreBadResponseError(f"JSON with error: {result}")
 
         return [dict_to_patient_dto(patient_dict) for patient_dict in result]

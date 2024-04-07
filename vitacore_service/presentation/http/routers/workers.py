@@ -1,15 +1,27 @@
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, HTTPException
 
+from vitacore_service.application.common.schemas import ErrorMessage
 from vitacore_service.application.workers.schemas import GetWorkersRequest, WorkerRead
+from vitacore_service.domain.exceptions.vitacore import VitacoreError
 from vitacore_service.infra.dependencies import ioc_dep
 
 router = APIRouter()
 
 
-@router.get("/workers", response_model=list[WorkerRead], name="Получить сотрудников МО")
+@router.get(
+    "/workers",
+    response_model=list[WorkerRead],
+    name="Получить сотрудников МО",
+    responses={
+        530: {
+            "model": ErrorMessage,
+            "description": "Something went wrong with VitaCore... Check detail",
+        },
+    },
+)
 async def get_workers_by_department(
     ioc: ioc_dep,
     department_id: Annotated[
@@ -24,6 +36,12 @@ async def get_workers_by_department(
     * Сохраняет результат в БД
     """
     async with ioc.get_workers_by_department() as get_workers:
-        return await get_workers(
-            GetWorkersRequest(department_id=department_id),
-        )
+        try:
+            return await get_workers(
+                GetWorkersRequest(department_id=department_id),
+            )
+        except VitacoreError as error:
+            raise HTTPException(
+                status_code=530,
+                detail=str(error),
+            )
