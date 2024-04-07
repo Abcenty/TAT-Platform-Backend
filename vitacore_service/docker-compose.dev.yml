@@ -21,7 +21,7 @@ services:
   vitacore_db:
     container_name: postgres_vitacore_db
     image: postgres:16-alpine
-    restart: always
+    restart: on-failure
     ports:
       - "5432:5432"
     env_file:
