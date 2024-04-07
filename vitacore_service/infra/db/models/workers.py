@@ -17,13 +17,13 @@ class Worker(Base):
     __tablename__ = "worker"
 
     id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid.uuid4)
-    snils: Mapped[str] = mapped_column(nullable=False)
-    last_name: Mapped[str] = mapped_column(nullable=False)
-    first_name: Mapped[str] = mapped_column(nullable=False)
-    middle_name: Mapped[str] = mapped_column(nullable=False)
-    birth_date: Mapped[date] = mapped_column(nullable=False)
-    date_begin: Mapped[date | None] = mapped_column(nullable=True)
-    date_end: Mapped[date | None] = mapped_column(nullable=True)
-    contacts: Mapped[list[dict]] = mapped_column(JSONB, nullable=False)
+    snils: Mapped[str] = mapped_column()
+    last_name: Mapped[str] = mapped_column()
+    first_name: Mapped[str] = mapped_column()
+    middle_name: Mapped[str] = mapped_column()
+    birth_date: Mapped[date] = mapped_column()
+    date_begin: Mapped[date | None] = mapped_column()
+    date_end: Mapped[date | None] = mapped_column()
+    contacts: Mapped[list[dict]] = mapped_column(JSONB)
 
     positions: Mapped[list["Position"]] = relationship(back_populates="worker")
