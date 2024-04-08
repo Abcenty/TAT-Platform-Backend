@@ -1,10 +1,12 @@
 from sqlalchemy.dialects.postgresql import insert
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from vitacore_service.adapters.db.positions.positions_converter import (
     position_dto_to_db,
 )
 from vitacore_service.application.common.positions_gateway import PositionSaver
+from vitacore_service.domain.exceptions.positions import PositionBadDepartmentError
 from vitacore_service.domain.models.positions import PositionDTO
 from vitacore_service.infra.db.models import Position
 
@@ -56,4 +58,7 @@ class DBPositionsGateway(PositionSaver):
             },
         )
 
-        await self.session.execute(stmt)
+        try:
+            await self.session.execute(stmt)
+        except IntegrityError:
+            raise PositionBadDepartmentError()

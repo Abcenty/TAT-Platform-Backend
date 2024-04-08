@@ -5,6 +5,7 @@ from fastapi import APIRouter, Query, HTTPException
 
 from vitacore_service.application.common.schemas import ErrorMessage
 from vitacore_service.application.workers.schemas import GetWorkersRequest, WorkerRead
+from vitacore_service.domain.exceptions.positions import PositionBadDepartmentError
 from vitacore_service.domain.exceptions.vitacore import VitacoreError
 from vitacore_service.infra.dependencies import ioc_dep
 
@@ -19,6 +20,13 @@ router = APIRouter()
         530: {
             "model": ErrorMessage,
             "description": "Something went wrong with VitaCore... Check detail",
+        },
+        400: {
+            "model": ErrorMessage,
+            "description": (
+                "It is impossible to save the result because one of the organizations is "
+                "not in the database. Try the /departments method first"
+            ),
         },
     },
 )
@@ -43,5 +51,10 @@ async def get_workers_by_department(
         except VitacoreError as error:
             raise HTTPException(
                 status_code=530,
+                detail=str(error),
+            )
+        except PositionBadDepartmentError as error:
+            raise HTTPException(
+                status_code=400,
                 detail=str(error),
             )
