@@ -23,6 +23,9 @@ class Settings(BaseSettings):
     vitacore_host: str
     vitacore_port: int = 80
 
+    service_host: str = "0.0.0.0"
+    service_port: int = 8001
+
     @property
     @lru_cache(maxsize=None)
     def vitacore_url(self) -> str:

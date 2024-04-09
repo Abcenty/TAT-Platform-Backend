@@ -14,6 +14,7 @@ sqlalchemy = {version = "^2.0.29", extras = ["asyncio"]}
 asyncpg = "^0.29.0"
 alembic = "^1.13.1"
 pydantic-settings = "^2.2.1"
+gunicorn = "^21.2.0"
 
 
 [tool.poetry.group.dev.dependencies]

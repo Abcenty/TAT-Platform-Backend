@@ -7,7 +7,7 @@ services:
       context: ../
       dockerfile: vitacore_service/Dockerfile
     ports:
-      - "8001:8000"
+      - "8001:${SERVICE_PORT}"
     restart: unless-stopped
     volumes:
       - ./:/vitacore_service/
