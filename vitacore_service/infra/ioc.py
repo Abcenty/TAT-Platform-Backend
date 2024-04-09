@@ -30,53 +30,49 @@ class IoC(InteractorFactory):
 
     @asynccontextmanager
     async def get_departments(self) -> AsyncContextManager[GetDepartments]:
-        async with self._async_session_factory() as db_session:
-            async with aiohttp.ClientSession() as aiohttp_session:
-                yield GetDepartments(
-                    http_departments_reader=get_http_departments_gateway(
-                        aiohttp_session,
-                        get_settings(),
-                    ),
-                    db_departments_saver=get_db_departments_gateway(db_session),
-                    uow=get_uow(db_session),
-                )
+        async with self._async_session_factory() as db_session, aiohttp.ClientSession() as aiohttp_session:
+            yield GetDepartments(
+                http_departments_reader=get_http_departments_gateway(
+                    aiohttp_session,
+                    get_settings(),
+                ),
+                db_departments_saver=get_db_departments_gateway(db_session),
+                uow=get_uow(db_session),
+            )
 
     @asynccontextmanager
     async def get_workers_by_department(self) -> AsyncContextManager[GetWorkers]:
-        async with self._async_session_factory() as db_session:
-            async with aiohttp.ClientSession() as aiohttp_session:
-                yield GetWorkers(
-                    http_workers_reader=get_http_workers_gateway(
-                        aiohttp_session,
-                        get_settings(),
-                    ),
-                    db_positions_saver=get_db_positions_gateway(db_session),
-                    db_workers_saver=get_db_workers_gateway(db_session),
-                    uow=get_uow(db_session),
-                )
+        async with self._async_session_factory() as db_session, aiohttp.ClientSession() as aiohttp_session:
+            yield GetWorkers(
+                http_workers_reader=get_http_workers_gateway(
+                    aiohttp_session,
+                    get_settings(),
+                ),
+                db_positions_saver=get_db_positions_gateway(db_session),
+                db_workers_saver=get_db_workers_gateway(db_session),
+                uow=get_uow(db_session),
+            )
 
     @asynccontextmanager
     async def get_patient(self) -> AsyncContextManager[GetPatient]:
-        async with self._async_session_factory() as db_session:
-            async with aiohttp.ClientSession() as aiohttp_session:
-                yield GetPatient(
-                    http_patients_reader=get_http_patients_gateway(
-                        aiohttp_session,
-                        get_settings(),
-                    ),
-                    db_patients_saver=get_db_patients_gateway(db_session),
-                    uow=get_uow(db_session),
-                )
+        async with self._async_session_factory() as db_session, aiohttp.ClientSession() as aiohttp_session:
+            yield GetPatient(
+                http_patients_reader=get_http_patients_gateway(
+                    aiohttp_session,
+                    get_settings(),
+                ),
+                db_patients_saver=get_db_patients_gateway(db_session),
+                uow=get_uow(db_session),
+            )
 
     @asynccontextmanager
     async def find_patients(self) -> AsyncContextManager[FindPatients]:
-        async with self._async_session_factory() as db_session:
-            async with aiohttp.ClientSession() as aiohttp_session:
-                yield FindPatients(
-                    http_patients_reader=get_http_patients_gateway(
-                        aiohttp_session,
-                        get_settings(),
-                    ),
-                    db_patients_saver=get_db_patients_gateway(db_session),
-                    uow=get_uow(db_session),
-                )
+        async with self._async_session_factory() as db_session, aiohttp.ClientSession() as aiohttp_session:
+            yield FindPatients(
+                http_patients_reader=get_http_patients_gateway(
+                    aiohttp_session,
+                    get_settings(),
+                ),
+                db_patients_saver=get_db_patients_gateway(db_session),
+                uow=get_uow(db_session),
+            )
