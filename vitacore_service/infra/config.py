@@ -1,4 +1,4 @@
-from functools import lru_cache
+from functools import lru_cache, cached_property
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy import URL
@@ -26,13 +26,11 @@ class Settings(BaseSettings):
     service_host: str = "0.0.0.0"
     service_port: int = 8001
 
-    @property
-    @lru_cache(maxsize=None)
+    @cached_property
     def vitacore_url(self) -> str:
         return f"{self.vitacore_protocol}://{self.vitacore_host}:{self.vitacore_port}/"
 
-    @property
-    @lru_cache(maxsize=None)
+    @cached_property
     def database_url(self) -> URL:
         return URL.create(
             drivername="postgresql+asyncpg",
