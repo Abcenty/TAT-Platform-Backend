@@ -39,6 +39,7 @@ class HttpPatientsGateway(PatientReader):
             raise VitacoreUnreachableError()
 
         if "firstName" not in result:
+            # TODO: find out in what form VitaCore returns errors in order to process them
             raise VitacoreBadResponseError(f"JSON with error: {result}")
 
         return dict_to_patient_dto(result)
@@ -74,6 +75,7 @@ class HttpPatientsGateway(PatientReader):
             raise VitacoreUnreachableError()
 
         if not isinstance(result, list):
+            # TODO: find out in what form VitaCore returns errors in order to process them
             raise VitacoreBadResponseError(f"JSON with error: {result}")
 
         return [dict_to_patient_dto(patient_dict) for patient_dict in result]

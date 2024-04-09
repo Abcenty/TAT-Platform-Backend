@@ -37,6 +37,7 @@ class HttpWorkersGateway(WorkerReader):
             raise VitacoreUnreachableError()
 
         if not isinstance(result, list):
+            # TODO: find out in what form VitaCore returns errors in order to process them
             raise VitacoreBadResponseError(f"JSON with error: {result}")
 
         return [dict_to_worker_dto(worker_dict) for worker_dict in result]

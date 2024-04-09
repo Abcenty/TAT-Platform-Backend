@@ -38,6 +38,7 @@ class HttpDepartmentsGateway(DepartmentReader):
             raise VitacoreUnreachableError()
 
         if not isinstance(result, list):
+            # TODO: find out in what form VitaCore returns errors in order to process them
             raise VitacoreBadResponseError(f"JSON with error: {result}")
 
         return list_to_department_dto(result)
