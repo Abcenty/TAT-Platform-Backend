@@ -22,10 +22,12 @@ RUN apt-get update \
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
-WORKDIR /client
-COPY pyproject.toml /client/
+WORKDIR /app
+COPY pyproject.toml /app
 
 RUN poetry install --only=main --no-interaction --no-ansi
-COPY . /client
+
+COPY /api_gateway /app
+
 
 ENTRYPOINT [ "poetry", "run", "python", "-m", "api_gateway" ]

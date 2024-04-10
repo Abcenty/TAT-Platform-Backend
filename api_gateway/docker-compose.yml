@@ -3,8 +3,8 @@ services:
   api:
     build:
       context: ../
-      dockerfile: api-gateway/Dockerfile
-    image: tat-platform-backend:api-gateway
+      dockerfile: api_gateway/Dockerfile
+    image: sertarsk/tat-platform-backend:api-gateway
     networks:
       - tat-platform
     ports:

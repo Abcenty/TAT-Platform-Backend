@@ -1,79 +1,28 @@
-from typing import Any
+from typing import Any, Optional, Dict
 
 from gunicorn.app.base import BaseApplication
-from gunicorn.util import import_app
-from uvicorn.workers import UvicornWorker as BaseUvicornWorker
-
-try:
-    import uvloop  # noqa: WPS433 (Found nested import)
-except ImportError:
-    uvloop = None  # ignore  # noqa: WPS440 (variables overlap)
 
 
-class UvicornWorker(BaseUvicornWorker):
-    """
-    Configuration for uvicorn workers.
+class StandaloneApplication(BaseApplication):
 
-    This class is subclassing UvicornWorker and defines
-    some parameters class-wide, because it's impossible,
-    to pass these parameters through gunicorn.
-    """
-
-    CONFIG_KWARGS = {  # noqa: WPS115 (upper-case constant in a class)
-        "loop": "uvloop" if uvloop is not None else "asyncio",
-        "http": "httptools",
-        "lifespan": "on",
-        "factory": True,
-        "proxy_headers": False,
-    }
-
-
-class GunicornApplication(BaseApplication):  # type: ignore[misc]
-    """
-    Custom gunicorn application.
-
-    This class is used to start guncicorn
-    with custom uvicorn workers.
-    """
-
-    def __init__(  # noqa: WPS211 (Too many args)
+    def __init__(
         self,
-        app: str,
-        host: str,
-        port: int,
-        workers: int,
-        **kwargs: Any,
+        application: Any,
+        options: Optional[Dict[str, Any]] = None
     ):
-        self.options = {
-            "bind": f"{host}:{port}",
-            "workers": workers,
-            "worker_class": "gateway.gunicorn_runner.UvicornWorker",
-            **kwargs,
-        }
-        self.app = app
+        self._options = options or {}
+        self._application = application
+
         super().__init__()
 
     def load_config(self) -> None:
-        """
-        Load config for web server.
-
-        This function is used to set parameters to gunicorn
-        main process. It only sets parameters that
-        gunicorn can handle. If you pass unknown
-        parameter to it, it crash with error.
-        """
-        for key, value in self.options.items():
-            if key in self.cfg.settings and value is not None:
-                self.cfg.set(key.lower(), value)
+        config = {
+            key: value
+            for key, value in self._options.items()
+            if key in self.cfg.settings and value is not None
+        }
+        for key, value in config.items():
+            self.cfg.set(key.lower(), value)
 
     def load(self) -> Any:
-        """
-        Load actual application.
-
-        Gunicorn loads application based on this
-        function's returns. We return python's path to
-        the app's factory.
-
-        :returns: python path to app factory.
-        """
-        return import_app(self.app)
+        return self._application

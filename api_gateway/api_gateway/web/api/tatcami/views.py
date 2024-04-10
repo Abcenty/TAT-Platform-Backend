@@ -38,7 +38,7 @@ async def get_general_statistics(token: Annotated[str | None, Header()]):
             raise AuthorizationError()
 
     try:
-        return await tatcami_get_session("api/v1/statistics/")
+        return await tatcami_get_session("")
     except AbstractError as error:
         logging.error(
             f"Error while getting general statistics:({error.status}: {error.message})",
@@ -71,7 +71,7 @@ async def get_organizations_statistics(token: Annotated[str | None, Header()]):
             raise AuthorizationError()
 
     try:
-        return await tatcami_get_session("api/v1/statistics/organizations/")
+        return await tatcami_get_session("organizations/")
     except AbstractError as error:
         logging.error(
             f"Error while getting statistics on organizations:({error.status}: {error.message})",
@@ -107,7 +107,7 @@ async def get_devices_of_organization(token: Annotated[str | None, Header()], or
             raise AuthorizationError()
 
     try:
-        return await tatcami_get_session(f"api/v1/statistics/organizations/{organization_id}")
+        return await tatcami_get_session(f"devices/organization/{organization_id}")
     except AbstractError as error:
         if error.message == "InvalidOrganizationIdError":
             raise InvalidOrganizationIdError()
