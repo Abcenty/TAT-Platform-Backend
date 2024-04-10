@@ -44,6 +44,11 @@ class Settings(BaseSettings):
     user_service_service_host: str
     user_service_service_port: int
 
+    # Микросервис vitacore
+    vitacore_service_protocol: str
+    vitacore_service_host: str
+    vitacore_service_port: int
+
     log_level: LogLevel = LogLevel.DEBUG
 
     # model_config = SettingsConfigDict(
